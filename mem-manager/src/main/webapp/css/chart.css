@@ -1,0 +1,86 @@
+th, td{
+	width="200px";
+}
+#family-count{
+display: inline-block;
+    font-weight: 400;
+    text-align: left;
+    vertical-align: middle;
+        border: 1px solid #ced4da;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+	width: 200px;
+    line-height: 1.5;
+    border-radius: .25rem;
+	margin-right: 20px;
+}
+.table{
+	width: auto;
+}
+.navbar-nav .nav-link {
+    float: right;
+}
+.search-left{
+	float:left;
+}
+.name{
+	float:left;
+}
+.edit-btn{
+	float:left;
+}
+.cell{
+	display: inline-block;
+}
+.name{
+	margin-bottom:0px;
+	margin-left:10px;
+}
+table td i {
+    font-size: 13px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+table td .add {
+    display: none;
+}
+td {
+    background: powderblue;
+}
+thead tr{
+background: #17a2b8;
+color: white;
+}
+tbody td{
+	padding-bottom: 0px;
+}
+.navbar-nav .nav-link{
+	padding: 0px;
+}
+tbody form{
+	margin: 0 5px;
+}
+
+tbody input{
+	margin-top:5px;
+}
+.family-search{
+	display: inline-block;
+    font-weight: 400;
+    text-align: left;
+    vertical-align: middle;
+        border: 1px solid #ced4da;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+	margin-left: 0px;
+}
+.search-code{
+	float:right;
+}
+.btn-family-dividing, .btn-family-dividing:hover {
+    color: #f9fafb;
+    text-decoration: none;
+    background-color: transparent;
+}

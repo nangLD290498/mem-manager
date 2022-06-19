@@ -1,0 +1,32 @@
+label{
+	width: 150px;
+}
+input[type="text"],  input[type="number"], select{
+	display: inline-block;
+    font-weight: 400;
+    text-align: left;
+    vertical-align: middle;
+        border: 1px solid #ced4da;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+	margin-left: 0px;
+}
+
+input[type="submit"]{
+	color: #fff;
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+	text-align: center;
+	border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;	
+	margin-bottom: 30px;
+}
+
+select{
+	padding-right:25px;
+}
