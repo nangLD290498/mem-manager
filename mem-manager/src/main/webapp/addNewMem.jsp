@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,31 +22,31 @@
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Thêm khóa sinh</h1><br>
                 <div>
-                    <form action="/action_page.php">
-                        <label for="fname">Họ Tên:</label>
-                        <input type="text" id="fname" name="fname" ><br><br>
-                        <label for="fcode">SBD:</label>
-                        <input type="text" id="fcode" name="fcode" readonly><br><br>
-                        <label for="lage">Tuổi:</label>
-                        <input type="number" id="lage" name="lage" ><br><br>
-                        <label>Giới Tính:</label>
-                        <input type="radio" id="lmale" checked name="fgender" value="male"> Nam &nbsp;&nbsp;
-                        <input type="radio" id="lfemale" name="fgender" value="female"> Nữ<br><br>
-                        <label>Điểm danh:</label>
-                        <input type="radio" id="lattention" name="attention" value="yes"> Tham gia &nbsp;&nbsp;
-                        <input type="radio" id="lattention_no" checked name="attention" value="no"> Không tham gia<br><br>
-                        <label for="lphone">Điện thoại:</label>
-                        <input type="text" id="lphone" name="lphone"><br><br>
-                        <label for="lrelative">Tên người thân:</label>
-                        <input type="text" id="lrelative" name="lrelative"><br><br>
-                        <label for="lrelationship">Mối quan hệ:</label>
-                        <input type="text" id="lrelationship" name="lrelationship"><br><br>
-                        <label for="lrelativephone">Điện thoại:</label>
-                        <input type="text" id="lrelativephone" name="lrelativephone" ><br><br>
+                                    <form method="POST" action="/addNewMem" modelAttribute="member">
+                                        <label>Họ Tên:</label>
+                                        <input type="text" id="fname" name="name" > <br><br>
+                                        <label for="fcode">SBD:</label>
+                                        <input type="text" id="fcode" name="code" readonly><br><br>
+                                        <label>Tuổi:</label>
+                                        <input type="number" id="lage" name="age" ><br><br>
+                                        <label>Giới Tính:</label>
+                                        <input type="radio" id="lmale" checked name="gender" value="Nam"> Nam &nbsp;&nbsp;
+                                        <input type="radio" id="lfemale" name="gender" value="Nữ"> Nữ<br><br>
+                                        <label>Điểm danh:</label>
+                                        <input type="radio" id="lattention_no" checked name="isAtending" value="true"> Không tham gia &nbsp;&nbsp;
+                                        <input type="radio" id="lattention" name="isAtending" value="false"> Tham gia <br><br>
+                                        <label>Điện thoại:</label>
+                                        <input type="text" id="lphone" name="phoneNumber"><br><br>
+                                        <label>Tên người thân:</label>
+                                        <input type="text" id="lrelative" name="relativeName"><br><br>
+                                        <label>Mối quan hệ:</label>
+                                        <input type="text" id="lrelationship" name="relationship"><br><br>
+                                        <label>Điện thoại:</label>
+                                        <input type="text" id="lrelativephone" name="relativePhoneNumber" ><br><br>
 
-                        <input type="submit" value="Xong">
-                    </form>
-                </div>
+                                        <input type="submit" value="Xong">
+                                    </form>
+                                </div>
             </div>
         </main>
         <%@include file="includedJsp/footer.jsp" %>
