@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,31 +31,33 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <div class= "search-left">
-                            <button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Thêm Khóa Sinh</button>
-                            <form action="">
-                                <select name="cars" id="cars">
-                                    <option value="volvo">Nam</option>
-                                    <option value="saab">Nữ</option>
+                            <a href="addNewMemForm"><button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Thêm Khóa Sinh</button></a>
+                            <form action="searchMembers">
+                                <select name="gender" id="gender">
+                                    <option value="all" <c:if test="${gender == 'all'}">selected</c:if> >--all--</option>
+                                    <option value="Nam" <c:if test="${gender == 'Nam'}">selected</c:if> >Nam</option>
+                                    <option value="Nữ" <c:if test="${gender == 'Nữ'}">selected</c:if> >Nữ</option>
                                 </select>
-                                <select name="ages" id="ages">
-                                    <option value="volvo">10 tuổi</option>
-                                    <option value="saab">15 tuổi</option>
-                                    <option value="saab">17 tuổi</option>
-                                    <option value="saab">14 tuổi</option>
-                                    <option value="saab">12 tuổi</option>
+                                <select name="age" id="age">
+                                    <option value="all">--all--</option>
+                                    <c:if test="${not empty ages}">
+                                        <c:forEach items="${ages}" var="item">
+                                            <option value="${item}">${item} tuổi</option>
+                                        </c:forEach>
+                                    </c:if>
                                 </select>
-                                <select name="family" id="family">
+                                <!-- <select name="family" id="family">
                                     <option value="volvo">Trần Hưng Đạo</option>
                                     <option value="saab">Trần Nhân Tông</option>
                                     <option value="saab">Hồ Chí Minh</option>
-                                </select>
-                                <!-- <input type="submit" value="Tìm Kiếm" class="btn-submit"> -->
+                                </select>-->
+                                <input type="submit" value="Tìm Kiếm" class="btn-submit">
                             </form>
                         </div>
 
                         <div class = "search-code">
-                            <form action="">
-                                <input type="text" id="lname" name="lname" placeholder="Nhập SBD">
+                            <form action="members" method="get">
+                                <input type="text" id="code" name="code" placeholder="Nhập SBD" <c:if test="${not empty param_code}">value="${param_code}"</c:if>>
                                 <!-- <input type="submit" value="Submit"> -->
                             </form>
                         </div>
@@ -65,6 +68,7 @@
                             <tr>
                                 <th>Tên</th>
                                 <th>Gia đình</th>
+                                <th>SBD</th>
                                 <th>Tuổi</th>
                                 <th>Giới tính</th>
                                 <th>Điểm danh</th>
@@ -75,6 +79,7 @@
                             <tr>
                                 <th>Tên</th>
                                 <th>Gia đình</th>
+                                <th>SBD</th>
                                 <th>Tuổi</th>
                                 <th>Giới tính</th>
                                 <th>Điểm danh</th>
@@ -82,276 +87,36 @@
                             </tr>
                             </tfoot>
                             <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck" name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Garrett Winters</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>63</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck" name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Ashton Cox</td>
-                                <td>Junior Technical Author</td>
-                                <td>San Francisco</td>
-                                <td>66</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck" name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Cedric Kelly</td>
-                                <td>Senior Javascript Developer</td>
-                                <td>Edinburgh</td>
-                                <td>22</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck"  name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Airi Satou</td>
-                                <td>Accountant</td>
-                                <td>Tokyo</td>
-                                <td>33</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck" name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Brielle Williamson</td>
-                                <td>Integration Specialist</td>
-                                <td>New York</td>
-                                <td>61</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck" name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Herrod Chandler</td>
-                                <td>Sales Assistant</td>
-                                <td>San Francisco</td>
-                                <td>59</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck"  name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Rhona Davidson</td>
-                                <td>Integration Specialist</td>
-                                <td>Tokyo</td>
-                                <td>55</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck"  name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Colleen Hurst</td>
-                                <td>Javascript Developer</td>
-                                <td>San Francisco</td>
-                                <td>39</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck" name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Sonya Frost</td>
-                                <td>Software Engineer</td>
-                                <td>Edinburgh</td>
-                                <td>23</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck" name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Jena Gaines</td>
-                                <td>Office Manager</td>
-                                <td>London</td>
-                                <td>30</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck" name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Quinn Flynn</td>
-                                <td>Support Lead</td>
-                                <td>Edinburgh</td>
-                                <td>22</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck"  name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Charde Marshall</td>
-                                <td>Regional Director</td>
-                                <td>San Francisco</td>
-                                <td>36</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck"  name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Haley Kennedy</td>
-                                <td>Senior Marketing Designer</td>
-                                <td>London</td>
-                                <td>43</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck"  name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Tatyana Fitzpatrick</td>
-                                <td>Regional Director</td>
-                                <td>London</td>
-                                <td>19</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck"  name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Brenden Wagner</td>
-                                <td>Software Engineer</td>
-                                <td>San Francisco</td>
-                                <td>28</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck"  name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Fiona Green</td>
-                                <td>Chief Operating Officer (COO)</td>
-                                <td>San Francisco</td>
-                                <td>48</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck"   name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Donna Snider</td>
-                                <td>Customer Support</td>
-                                <td>New York</td>
-                                <td>27</td>
-                                <td>
-                                    <input type="checkbox" class="isAttendedCheck"  name="isAttended" value="isAttended"  />
-                                    <label class="checkbox-text">Không tham gia</label>
-                                </td>
-                                <td>
-                                    <a href="details.html" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
-                                    <a href="details.html" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
+                             <c:if test="${not empty members}">
+                                 <c:forEach items="${members}" var="item">
+                                    <tr>
+                                       <td>${item.name}</td>
+                                       <td>
+                                           <c:if test="${not empty item.family}">
+                                                ${item.family.name}
+                                           </c:if>
+                                           <c:if test="${empty item.family}">
+                                                Chưa được xếp
+                                           </c:if>
+                                       </td>
+                                       <td>${item.code}</td>
+                                       <td>${item.age}</td>
+                                       <td>${item.gender}</td>
+                                       <td>
+                                            <input type="checkbox" <c:if test="${item.isAtending == 'true'}"> checked </c:if> class="isAttendedCheck" name="isAttended" value="isAttended"  />
+                                            <label class="checkbox-text">
+                                            <c:if test="${item.isAtending == 'true'}"> Tham gia </c:if>
+                                            <c:if test="${item.isAtending == 'false'}"> Không tham gia </c:if>
+                                            </label>
+                                        </td>
+                                        <td>
+                                            <a href="/getDetails?id=${item.id}" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
+                                            <a href="/updateMemPage?id=${item.id}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                            <a href="/deleteMem?code=${item.code}" class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
+                                        </td>
+                                    </tr>
+                                 </c:forEach>
+                             </c:if>
                             </tbody>
                         </table>
                     </div>

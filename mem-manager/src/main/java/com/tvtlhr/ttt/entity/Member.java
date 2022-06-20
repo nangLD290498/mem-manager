@@ -34,7 +34,8 @@ public class Member {
 
     @Column
     @NotNull
-    private boolean isAtending;
+    private String isAtending;
+
 
     @Column
     private String gender;

@@ -6,7 +6,7 @@ float:right;
 float:left;
 display: inline-flex;
 }
-#lname{
+#age, #gender{
 	display: inline-block;
     font-weight: 400;
     text-align: left;

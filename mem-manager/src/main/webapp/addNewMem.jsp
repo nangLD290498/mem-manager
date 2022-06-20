@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,8 +34,8 @@
                                         <input type="radio" id="lmale" checked name="gender" value="Nam"> Nam &nbsp;&nbsp;
                                         <input type="radio" id="lfemale" name="gender" value="Nữ"> Nữ<br><br>
                                         <label>Điểm danh:</label>
-                                        <input type="radio" id="lattention_no" checked name="isAtending" value="true"> Không tham gia &nbsp;&nbsp;
-                                        <input type="radio" id="lattention" name="isAtending" value="false"> Tham gia <br><br>
+                                        <input type="radio" id="lattention_no" checked name="isAtending" value="false"> Không tham gia &nbsp;&nbsp;
+                                        <input type="radio" id="lattention" name="isAtending" value="true"> Tham gia <br><br>
                                         <label>Điện thoại:</label>
                                         <input type="text" id="lphone" name="phoneNumber"><br><br>
                                         <label>Tên người thân:</label>
