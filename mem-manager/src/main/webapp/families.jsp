@@ -11,6 +11,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 	<link href="css/styles.css" rel="stylesheet" />
 	<link href="css/chart.css" rel="stylesheet" />
+	<link href="css/families.css" rel="stylesheet" />
 	<script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round|Open+Sans">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -27,26 +28,54 @@
 	<div id="layoutSidenav_content">
 		<main>
 			<div class="container-fluid px-4">
-				<br/>
+				 <h1 class="mt-4">TVTLHR</h1>
+                 <c:if test="${empty message}"><p>Quản Lý gia đình - Đoàn TTNPT Trần Thánh Tông TVTLHR</p></c:if>
+                 <p class="message-text">${message}</p>
 				<div class="card mb-4">
 					<div class="card-header">
 						<div class= "search-left">
-							<form action="">
-								<input type="number" id="family-count" max="30" min = "2" name="lname" placeholder="Số lượng gia đình">
-								<button type="submit" class="btn btn-info family-divide" ><a class="btn-family-dividing" href="familynameInput.html">Chia gia đình</a></button>
-							</form>
+                            <form action="searchMembers" id= "form-family">
+                                <div class="drop">
+                                  <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Gia Đình 1
+                                    <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
+                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
+                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
+                                    </ul>
+                                  </div>
+                                </div>&nbsp;&nbsp;&nbsp;
+                                <div class="drop">
+                                  <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Gia Đình 2
+                                    <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
+                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
+                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
+                                    </ul>
+                                  </div>
+                                </div>&nbsp;&nbsp;&nbsp;
+                                <div class="drop">
+                                  <div class="dropdown">
+                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Gia Đình 3
+                                    <span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
+                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
+                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
+                                    </ul>
+                                  </div>
+                                </div>&nbsp;&nbsp;&nbsp;
+                                <input type="submit" value="Hiển thị" class="btn-submit">
+                            </form>
 						</div>
 						<div class = "search-code">
-							<!-- Navbar-->
-							<select name="family-search" class="family-search"  >
-								<option value="volvo">Nguyễn Bỉnh Khiêm</option>
-								<option value="saab">Trần Nhân Tông</option>
-								<option value="opel">Trần Hưng Đạo</option>
-							</select>
+							<i class="fa fa-gear" id="setting-icon" ></i>
 						</div>
 					</div>
 					<div class="card-body">
-						<p>Gia Đình</p>
 						<table class="table table-bordered">
 							<thead>
 							<tr>

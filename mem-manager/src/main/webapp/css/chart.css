@@ -1,18 +1,18 @@
 th, td{
 	width="200px";
 }
-#family-count{
-display: inline-block;
+.family-select{
+    display: inline-block;
     font-weight: 400;
     text-align: left;
     vertical-align: middle;
-        border: 1px solid #ced4da;
+    border: 1px solid #ced4da;
     padding: .375rem .75rem;
     font-size: 1rem;
-	width: 200px;
+	width: auto;
     line-height: 1.5;
     border-radius: .25rem;
-	margin-right: 20px;
+	margin-right: 5px;
 }
 .table{
 	width: auto;

@@ -26,22 +26,22 @@
     <%@include file="includedJsp/sideBar.jsp" %>
     <div id="layoutSidenav_content">
         <main>
-            <p class="error-text">${message}</p>
-            <c:if test="${empty message}"><br></c:if>
             <div class="container-fluid px-4">
-                <br/>
+                <h1 class="mt-4">TVTLHR</h1>
+                <c:if test="${empty message}"><p>Quản Lý khóa sinh - Đoàn TTNPT Trần Thánh Tông TVTLHR</p></c:if>
+                <p class="message-text">${message}</p>
                 <div class="card mb-4">
                     <div class="card-header">
                         <div class= "search-left">
                             <a href="addNewMemForm"><button type="button" class="btn btn-info add-new"><i class="fa fa-plus"></i> Thêm Khóa Sinh</button></a>
                             <form action="searchMembers">
                                 <select name="gender" id="gender">
-                                    <option value="all" <c:if test="${gender == 'all'}">selected</c:if> >--all--</option>
+                                    <option value="all" <c:if test="${gender == 'all'}">selected</c:if> >All</option>
                                     <option value="Nam" <c:if test="${gender == 'Nam'}">selected</c:if> >Nam</option>
                                     <option value="Nữ" <c:if test="${gender == 'Nữ'}">selected</c:if> >Nữ</option>
                                 </select>
                                 <select name="age" id="age">
-                                    <option value="all" <c:if test="${age == 'all'}">selected</c:if> >--all--</option>
+                                    <option value="all" <c:if test="${age == 'all'}">selected</c:if> >All</option>
                                     <c:if test="${not empty ages}">
                                         <c:forEach items="${ages}" var="item">
                                             <option value="${item}" <c:if test="${age == item}">selected</c:if> >${item} tuổi</option>
@@ -49,7 +49,7 @@
                                     </c:if>
                                 </select>
                                 <select name="isAtending" id="isAtending">
-                                    <option value="all" <c:if test="${isAtending == 'all'}">selected</c:if> >--all--</option>
+                                    <option value="all" <c:if test="${isAtending == 'all'}">selected</c:if> >All</option>
                                     <option value="true" <c:if test="${isAtending == 'true'}">selected</c:if> >Tham gia</option>
                                     <option value="false" <c:if test="${isAtending == 'false'}">selected</c:if> >Không tham gia</option>
                                  </select>
@@ -119,7 +119,7 @@
                                         <td>
                                             <a href="/getDetails?id=${item.id}" class="add" title="View" data-toggle="tooltip"><i class="material-icons">&#xE03B;</i></a>
                                             <a href="/updateMemPage?id=${item.id}" class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                            <a href="/deleteMem?code=${item.code}" class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
+                                            <a href="/deleteMem?code=${item.code}" onclick="confirmPopUp('Bạn có chắc chắn muốn xóa khóa sinh này !!')" class="delete" title="Delete" ><i class="material-icons">&#xE872;</i></a>
                                         </td>
                                     </tr>
                                  </c:forEach>
@@ -129,7 +129,7 @@
                     </div>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-info save-attention" id="attention">Lưu điểm danh</button>
+                    <button type="button" class="btn btn-info save-attention" onclick="confirmPopUp('Bạn đang thực hiện điểm danh !!')" id="attention">Lưu điểm danh</button>
                 </div>
             </div>
         </main> <br/>

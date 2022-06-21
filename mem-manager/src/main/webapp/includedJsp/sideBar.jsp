@@ -8,11 +8,11 @@
                         Trang Chủ
                     </a>
                     <div class="sb-sidenav-menu-heading">Addons</div>
-                    <a class="nav-link" href="charts.html">
+                    <a class="nav-link" href="/familyMgtPage">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         Chia gia đình
                     </a>
-                    <a class="nav-link" href="tables.html">
+                    <a class="nav-link" href="/members">
                         <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                         Quản lý Khóa sinh
                     </a>

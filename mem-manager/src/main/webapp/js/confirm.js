@@ -1,3 +1,3 @@
-function confirm(text) {
+function confirmPopUp(text) {
   confirm(text);
 }

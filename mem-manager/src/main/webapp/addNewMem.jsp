@@ -22,9 +22,11 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Thêm khóa sinh</h1><br>
+                <h1 class="mt-4">Thêm khóa sinh</h1>
                 <div>
                                     <form method="POST" action="/addNewMem" modelAttribute="member">
+                                        <p class="error-text"><c:if test="${existed == 'true'}">Khóa sinh đã tồn tại (tên và điện thoại đã tồn tại)</c:if></p>
+                                        <c:if test="${empty existed}"><p>Điền thông tin khóa sinh cần thêm</p></c:if>
                                         <label>Họ Tên:</label>
                                         <input type="text" id="fname" name="name" required>
                                         <span> </span> <br><br>
@@ -44,9 +46,8 @@
                                         <input type="text" id="lrelationship" name="relationship"><br><br>
                                         <label>Điện thoại:</label>
                                         <input type="text" id="lrelativephone" name="relativePhoneNumber" ><br><br>
-                                        <p class="error-text"><c:if test="${existed == 'true'}">Khóa sinh đã tồn tại (tên và điện thoại đã tồn tại)</c:if></p>
-                                        <c:if test="${empty existed}"><br></c:if>
-                                        <input type="submit" onclick="confirm('bạn đang thêm khóa sinh !!')" value="Xong">
+
+                                        <input type="submit" onclick="confirmPopUp('bạn đang thêm khóa sinh !!')" value="Xong">
                                     </form>
                                 </div>
             </div>

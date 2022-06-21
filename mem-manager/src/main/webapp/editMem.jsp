@@ -21,10 +21,12 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Chỉnh sửa thông tin khóa sinh</h1><br>
+                <h1 class="mt-4">Chỉnh sửa thông tin khóa sinh</h1>
                 <div>
                     <form action="/updateMember">
                         <input type="hidden" id="memberID" value="${member.id}" name="id"  readonly/>
+                        <p class="error-text"><c:if test="${existed == 'true'}">Hãy thay đổi thông tin để chỉnh sửa</c:if></p>
+                        <c:if test="${empty existed}"><p>Thông tin khóa sinh</p></c:if>
                         <label >Họ Tên:</label>
                         <input type="text" value="${member.name}" name="name"  required /><br><br>
                         <label>Gia Đình:</label>
@@ -52,9 +54,8 @@
                         <input type="text" value="${member.relationship}" name = "relationship"><br><br>
                         <label>Điện thoại:</label>
                         <input type="text" value="${member.relativePhoneNumber}" name = "relativePhoneNumber"><br><br>
-                        <p class="error-text"><c:if test="${existed == 'true'}">Thay đổi thông tin khóa sinh để chỉnh sửa</c:if></p>
-                        <c:if test="${empty existed}"><br></c:if>
-                        <input type="submit" value="Xong">
+
+                        <input type="submit" onclick="confirmPopUp('bạn đang chỉnh sửa thông tin khóa sinh !!')" value="Xong">
                     </form>
                 </div>
             </div>
