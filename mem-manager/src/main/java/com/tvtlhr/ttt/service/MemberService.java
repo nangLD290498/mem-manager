@@ -7,7 +7,9 @@ import java.util.Optional;
 
 public interface MemberService {
 
-    List<Member> searchMembers(String gender, String age);
+    void submitAttention(List<Integer> idList);
+
+    List<Member> searchMembers(String gender, String age, String isAtending);
 
     boolean updateMember(Member member);
 

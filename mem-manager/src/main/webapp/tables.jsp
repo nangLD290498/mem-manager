@@ -26,6 +26,8 @@
     <%@include file="includedJsp/sideBar.jsp" %>
     <div id="layoutSidenav_content">
         <main>
+            <p class="error-text">${message}</p>
+            <c:if test="${empty message}"><br></c:if>
             <div class="container-fluid px-4">
                 <br/>
                 <div class="card mb-4">
@@ -39,13 +41,18 @@
                                     <option value="Nữ" <c:if test="${gender == 'Nữ'}">selected</c:if> >Nữ</option>
                                 </select>
                                 <select name="age" id="age">
-                                    <option value="all">--all--</option>
+                                    <option value="all" <c:if test="${age == 'all'}">selected</c:if> >--all--</option>
                                     <c:if test="${not empty ages}">
                                         <c:forEach items="${ages}" var="item">
-                                            <option value="${item}">${item} tuổi</option>
+                                            <option value="${item}" <c:if test="${age == item}">selected</c:if> >${item} tuổi</option>
                                         </c:forEach>
                                     </c:if>
                                 </select>
+                                <select name="isAtending" id="isAtending">
+                                    <option value="all" <c:if test="${isAtending == 'all'}">selected</c:if> >--all--</option>
+                                    <option value="true" <c:if test="${isAtending == 'true'}">selected</c:if> >Tham gia</option>
+                                    <option value="false" <c:if test="${isAtending == 'false'}">selected</c:if> >Không tham gia</option>
+                                 </select>
                                 <!-- <select name="family" id="family">
                                     <option value="volvo">Trần Hưng Đạo</option>
                                     <option value="saab">Trần Nhân Tông</option>
@@ -103,10 +110,10 @@
                                        <td>${item.age}</td>
                                        <td>${item.gender}</td>
                                        <td>
-                                            <input type="checkbox" <c:if test="${item.isAtending == 'true'}"> checked </c:if> class="isAttendedCheck" name="isAttended" value="isAttended"  />
-                                            <label class="checkbox-text">
-                                            <c:if test="${item.isAtending == 'true'}"> Tham gia </c:if>
-                                            <c:if test="${item.isAtending == 'false'}"> Không tham gia </c:if>
+                                            <input type="checkbox" <c:if test="${item.isAtending == 'true'}"> checked </c:if> class="isAttendedCheck" id="${item.id}" name="isAttended" value="isAttended"  />
+                                            <label class="checkbox-text" id="${item.isAtending}">
+                                            <c:if test="${item.isAtending == 'true'}">Tham gia</c:if>
+                                            <c:if test="${item.isAtending == 'false'}">Không tham gia</c:if>
                                             </label>
                                         </td>
                                         <td>
@@ -122,7 +129,7 @@
                     </div>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-info save-attention">Lưu điểm danh</button>
+                    <button type="button" class="btn btn-info save-attention" id="attention">Lưu điểm danh</button>
                 </div>
             </div>
         </main> <br/>
@@ -133,13 +140,7 @@
 <script src="js/scripts.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
-<script>
-    $(document).ready(function() {
-    $(".isAttendedCheck").change(function() {
-        var label = $(this).parents("td").find('[class=checkbox-text]');
-        label.text(this.checked  ? "Tham gia" : "Không tham gia");
-    });
-});
-</script>
+<script src="js/tables-attention.js"></script>
+<script src="js/confirm.js"></script>
 </body>
 </html>

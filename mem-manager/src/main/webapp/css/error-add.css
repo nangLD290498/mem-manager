@@ -1,0 +1,7 @@
+.error-text{
+    color: red;
+    font-style: italic;
+}
+.readonly{
+    background-color: #dee2e6;
+}

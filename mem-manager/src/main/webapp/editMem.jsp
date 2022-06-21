@@ -11,6 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/details.css" rel="stylesheet" />
+    <link href="css/error-add.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
@@ -20,23 +21,23 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Thông tin khóa sinh</h1><br>
+                <h1 class="mt-4">Chỉnh sửa thông tin khóa sinh</h1><br>
                 <div>
                     <form action="/updateMember">
                         <input type="hidden" id="memberID" value="${member.id}" name="id"  readonly/>
                         <label >Họ Tên:</label>
-                        <input type="text" value="${member.name}" name="name"  /><br><br>
+                        <input type="text" value="${member.name}" name="name"  required /><br><br>
                         <label>Gia Đình:</label>
                         <c:if test="${not empty member.family}">
-                            <input type="text" value="${item.family.name}"  readonly /><br><br>
+                            <input type="text" class = "readonly" value="${item.family.name}"  readonly /><br><br>
                         </c:if>
                         <c:if test="${empty member.family}">
-                             <input type="text" value="Chưa được xếp" readonly /><br><br>
+                             <input type="text" class = "readonly" value="Chưa được xếp" readonly /><br><br>
                         </c:if>
                         <label>SBD:</label>
-                        <input type="text" value="${member.code}" name="code" readonly/ ><br><br>
+                        <input type="text" class = "readonly" value="${member.code}" name="code" readonly/ ><br><br>
                         <label>Tuổi:</label>
-                        <input type="number" value="${member.age}" name = "age" ><br><br>
+                        <input type="number" value="${member.age}" name = "age" required /><br><br>
                         <label>Giới Tính:</label>
                         <input type="radio" <c:if test="${member.gender == 'Nam'}">checked</c:if> id="lmale" name="gender" value="Nam" /> Nam &nbsp;&nbsp;
                         <input type="radio" <c:if test="${member.gender == 'Nữ'}">checked</c:if> id="lfemale" name="gender" value="Nữ"> Nữ<br><br>
@@ -51,7 +52,8 @@
                         <input type="text" value="${member.relationship}" name = "relationship"><br><br>
                         <label>Điện thoại:</label>
                         <input type="text" value="${member.relativePhoneNumber}" name = "relativePhoneNumber"><br><br>
-
+                        <p class="error-text"><c:if test="${existed == 'true'}">Thay đổi thông tin khóa sinh để chỉnh sửa</c:if></p>
+                        <c:if test="${empty existed}"><br></c:if>
                         <input type="submit" value="Xong">
                     </form>
                 </div>
@@ -67,5 +69,6 @@
 <script src="assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
+<script src="js/confirm.js"></script>
 </body>
 </html>

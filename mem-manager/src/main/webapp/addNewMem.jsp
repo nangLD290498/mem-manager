@@ -12,6 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/details.css" rel="stylesheet" />
+    <link href="css/error-add.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
@@ -25,11 +26,10 @@
                 <div>
                                     <form method="POST" action="/addNewMem" modelAttribute="member">
                                         <label>Họ Tên:</label>
-                                        <input type="text" id="fname" name="name" > <br><br>
-                                        <label for="fcode">SBD:</label>
-                                        <input type="text" id="fcode" name="code" readonly><br><br>
+                                        <input type="text" id="fname" name="name" required>
+                                        <span> </span> <br><br>
                                         <label>Tuổi:</label>
-                                        <input type="number" id="lage" name="age" ><br><br>
+                                        <input type="number" id="lage" name="age" required /><br><br>
                                         <label>Giới Tính:</label>
                                         <input type="radio" id="lmale" checked name="gender" value="Nam"> Nam &nbsp;&nbsp;
                                         <input type="radio" id="lfemale" name="gender" value="Nữ"> Nữ<br><br>
@@ -44,8 +44,9 @@
                                         <input type="text" id="lrelationship" name="relationship"><br><br>
                                         <label>Điện thoại:</label>
                                         <input type="text" id="lrelativephone" name="relativePhoneNumber" ><br><br>
-
-                                        <input type="submit" value="Xong">
+                                        <p class="error-text"><c:if test="${existed == 'true'}">Khóa sinh đã tồn tại (tên và điện thoại đã tồn tại)</c:if></p>
+                                        <c:if test="${empty existed}"><br></c:if>
+                                        <input type="submit" onclick="confirm('bạn đang thêm khóa sinh !!')" value="Xong">
                                     </form>
                                 </div>
             </div>
@@ -60,5 +61,6 @@
 <script src="assets/demo/chart-bar-demo.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
+<script src="js/confirm.js"></script>
 </body>
 </html>

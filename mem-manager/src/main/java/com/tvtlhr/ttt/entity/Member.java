@@ -28,6 +28,10 @@ public class Member {
     @NotNull(message = "Tuổi không thể bỏ trống")
     private int age;
 
+    public String getAgeString() {
+        return age+"";
+    }
+
     @Column
     @NumberFormat
     private String phoneNumber;

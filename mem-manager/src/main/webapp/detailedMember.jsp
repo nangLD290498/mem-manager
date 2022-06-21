@@ -25,35 +25,35 @@
                     <form action="/members">
                         <input type="hidden" id="memberID" value="${member.id}" name="id"  readonly/>
                         <label >Họ Tên:</label>
-                        <input type="text" value="${member.name}" readonly /><br><br>
+                        <input type="text" class="readonly" value="${member.name}" readonly /><br><br>
                         <label>Gia Đình:</label>
                         <c:if test="${not empty member.family}">
-                            <input type="text" value="${item.family.name}" readonly /><br><br>
+                            <input type="text" class="readonly" value="${item.family.name}" readonly /><br><br>
                         </c:if>
                         <c:if test="${empty member.family}">
-                             <input type="text" value="Chưa được xếp" readonly /><br><br>
+                             <input type="text" class="readonly" value="Chưa được xếp" readonly /><br><br>
                         </c:if>
                         <label>SBD:</label>
-                        <input type="text" value="${member.code}" readonly/ ><br><br>
+                        <input type="text" class="readonly" value="${member.code}" readonly/ ><br><br>
                         <label>Tuổi:</label>
-                        <input type="number" value="${member.age}" readonly><br><br>
+                        <input type="number" class="readonly" value="${member.age}" readonly><br><br>
                         <label>Giới Tính:</label>
-                        <input type="text" value="${member.gender}" readonly/ ><br><br>
+                        <input type="text" class="readonly" value="${member.gender}" readonly/ ><br><br>
                         <label>Điểm danh:</label>
                         <c:if test="${isAtending == 'true'}">
-                            <input type="text" value="Tham Gia" readonly/ ><br><br>
+                            <input type="text" class="readonly" value="Tham Gia" readonly/ ><br><br>
                         </c:if>
                         <c:if test="${isAtending == 'false'}">
-                             <input type="text" value="Không tham Gia" readonly/ ><br><br>
+                             <input type="text" class="readonly" value="Không tham Gia" readonly/ ><br><br>
                         </c:if>
                         <label>Điện thoại:</label>
-                        <input type="text" value="${member.phoneNumber}" readonly><br><br>
+                        <input type="text" class="readonly" value="${member.phoneNumber}" readonly><br><br>
                         <label>Tên người thân:</label>
-                        <input type="text" value="${member.relativeName}" readonly/><br><br>
+                        <input type="text" class="readonly" value="${member.relativeName}" readonly/><br><br>
                         <label>Mối quan hệ:</label>
-                        <input type="text" value="${member.relationship}"readonly/><br><br>
+                        <input type="text" class="readonly" value="${member.relationship}"readonly/><br><br>
                         <label>Điện thoại:</label>
-                        <input type="text" value="${member.relativePhoneNumber}" readonly/><br><br>
+                        <input type="text" class="readonly" value="${member.relativePhoneNumber}" readonly/><br><br>
 
                         <input type="submit" value="Xong">
                     </form>

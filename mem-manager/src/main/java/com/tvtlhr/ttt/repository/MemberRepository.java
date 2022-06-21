@@ -16,6 +16,11 @@ public interface MemberRepository extends JpaRepository<Member, Integer>{
     List<Member> findByGenderAndAge(String gender,int age);
     Long deleteByCode(String code);
     Member findByCode(String code);
+
+    @Modifying
+    @Query("UPDATE Member SET isAtending = CASE isAtending WHEN 'true' THEN 'false' ELSE 'true' END WHERE id = :id")
+    void updateAttentionByid(@Param("id") Integer id);
+
     @Query("select case when count(c)> 0 then true else false end from Member c where lower(c.name) = lower(:name) and c.phoneNumber = :phone")
     Boolean existsMemberByNameAndPhoneNumber(@Param("name") String name, @Param("phone") String phone);
 

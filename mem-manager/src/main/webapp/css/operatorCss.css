@@ -2,11 +2,15 @@
 .search-code{
 float:right;
 }
+.add-new{
+	margin-right:40px;
+}
 .search-left{
 float:left;
+
 display: inline-flex;
 }
-#age, #gender{
+#age, #gender, #isAtending, #code{
 	display: inline-block;
     font-weight: 400;
     text-align: left;
@@ -16,7 +20,7 @@ display: inline-flex;
     font-size: 1rem;
     line-height: 1.5;
     border-radius: .25rem;
-	margin-left: 50px;
+	margin-left: 10px;
 }
 
 .form-control, .dataTable-input {

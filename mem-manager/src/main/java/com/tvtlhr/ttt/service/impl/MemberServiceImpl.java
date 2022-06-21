@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -25,28 +26,32 @@ public class MemberServiceImpl implements MemberService {
     Utils utils;
 
     @Override
-    public List<Member> searchMembers(String gender, String age) {
-        Integer ageInt= 0;
+    public void submitAttention(List<Integer> idList) {
+        for (Integer id: idList) {
+            memberRepository.updateAttentionByid(id);
+        }
+    }
+
+    @Override
+    public List<Member> searchMembers(String gender, String age, String isAtending) {
+         int ageInt = 0;
         try{
-            if(!age.equals("all")) ageInt = Integer.parseInt(age);
+            if(!age.equals("all"))  ageInt = Integer.parseInt(age);
         }catch (Exception e){
             return null;
         }
-        List<Member> members = new ArrayList<>();
-        if(gender.equals("all") && age.equals("all")){
-            return memberRepository.findAll();
+        List<Member> members = memberRepository.findAll();
+        if(!gender.equals("all")){
+            members = members.stream().filter(member -> member.getGender().equals(gender)).collect(Collectors.toList());
         }
-        if(gender.equals("all") && !age.equals("all")){ // ngon
-            return memberRepository.findByAge(ageInt);
+        if(!age.equals("all")){
+            members = members.stream().filter(member -> member.getAge() == Integer.parseInt(age)).collect(Collectors.toList());
         }
-        if(!gender.equals("all") && age.equals("all")){
-            return memberRepository.findByGender(gender);
-        }
-        if(!gender.equals("all") && !age.equals("all")){
-            return memberRepository.findByGenderAndAge(gender, ageInt);
+        if(!isAtending.equals("all")){
+            members = members.stream().filter(member -> member.getIsAtending().equals(isAtending)).collect(Collectors.toList());
         }
 
-        return null;
+        return members;
     }
 
     @Override
@@ -89,7 +94,7 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public String createNewMember(Member member) {
         if(memberRepository.existsMemberByNameAndPhoneNumber(member.getName(), member.getPhoneNumber())){
-            return null;
+            return "null";
         }
         String code = utils.generateCode();
         member.setCode(code);
