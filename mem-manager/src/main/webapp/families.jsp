@@ -75,142 +75,106 @@
 							<i class="fa fa-gear" id="setting-icon" ></i>
 						</div>
 					</div>
-					<div class="card-body">
-						<table class="table table-bordered">
-							<thead>
-							<tr>
-								<th>Nguyễn Bỉnh Khiêm</th>
-								<th>Trân Nhân Tông</th>
-								<th>Trần Hưng Đạo</th>
-							</tr>
-							</thead>
-							<tbody>
-							<tr>
-								<td class = "male" style="background: #17a2b82e;;">
-									<div class = "edit-btn">
-										<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-											<li class="nav-item dropdown">
-												<a class="nav-link dropdown-toggle"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-fw"></i></a>
-												<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-													<form action="">
-														<select name="family-form"  >
-															<option value="volvo">Nguyễn Bỉnh Khiêm</option>
-															<option value="saab">Trần Nhân Tông</option>
-															<option value="opel">Trần Hưng Đạo</option>
-														</select>
-														<input type="submit" value="Chuyển gia đình">
-													</form>
-												</ul>
-											</li>
-										</ul>
-									</div>
-									<p class = "name">Le Duc Nang - 23</p>
-								</td>
-								<td class = "female" style="background: #ffc0cb91;;">
-									<div class = "edit-btn">
-										<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-											<li class="nav-item dropdown">
-												<a class="nav-link dropdown-toggle"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-fw"></i></a>
-												<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-													<form action="">
-														<select name="family-form"  >
-															<option value="volvo">Nguyễn Bỉnh Khiêm</option>
-															<option value="saab">Trần Nhân Tông</option>
-															<option value="opel">Trần Hưng Đạo</option>
-														</select>
-														<input type="submit" value="Chuyển gia đình">
-													</form>
-												</ul>
-											</li>
-										</ul>
-									</div>
-									<p class = "name">Lê Thị Hoài Trang - 20</p>
-								</td>
-								<td class = "male" style="background: #17a2b82e;;">
-									<div class = "edit-btn">
-										<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-											<li class="nav-item dropdown">
-												<a class="nav-link dropdown-toggle"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-fw"></i></a>
-												<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-													<form action="">
-														<select name="family-form"  >
-															<option value="volvo">Nguyễn Bỉnh Khiêm</option>
-															<option value="saab">Trần Nhân Tông</option>
-															<option value="opel">Trần Hưng Đạo</option>
-														</select>
-														<input type="submit" value="Chuyển gia đình">
-													</form>
-												</ul>
-											</li>
-										</ul>
-									</div>
-									<p class = "name">Nguyễn Văn Thành - 34</p>
-								</td>
-							</tr>
-							<tr>
-								<td class = "male" style="background: #17a2b82e;;">
-									<div class = "edit-btn">
-										<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-											<li class="nav-item dropdown">
-												<a class="nav-link dropdown-toggle"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-fw"></i></a>
-												<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-													<form action="">
-														<select name="family-form"  >
-															<option value="volvo">Nguyễn Bỉnh Khiêm</option>
-															<option value="saab">Trần Nhân Tông</option>
-															<option value="opel">Trần Hưng Đạo</option>
-														</select>
-														<input type="submit" value="Chuyển gia đình">
-													</form>
-												</ul>
-											</li>
-										</ul>
-									</div>
-									<p class = "name">Nguyễn Văn Thành - 34</p>
-								</td>
-								<td class = "male" style="background: #17a2b82e;;">
-									<div class = "edit-btn">
-										<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-											<li class="nav-item dropdown">
-												<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-fw"></i></a>
-												<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-													<form action="">
-														<select name="family-form"  >
-															<option value="volvo">Nguyễn Bỉnh Khiêm</option>
-															<option value="saab">Trần Nhân Tông</option>
-															<option value="opel">Trần Hưng Đạo</option>
-														</select>
-														<input type="submit" value="Chuyển gia đình">
-													</form>
-												</ul>
-											</li>
-										</ul>
-									</div>
-									<p class = "name">Lê Đức Năng - 23</p>
-								</td>
-								<td class = "male" style="background: #ffc0cb91;;">
-									<div class = "edit-btn">
-										<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-											<li class="nav-item dropdown">
-												<a class="nav-link dropdown-toggle"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-fw"></i></a>
-												<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-													<form action="">
-														<select name="family-form"  >
-															<option value="volvo">Nguyễn Bỉnh Khiêm</option>
-															<option value="saab">Trần Nhân Tông</option>
-															<option value="opel">Trần Hưng Đạo</option>
-														</select>
-														<input type="submit" value="Chuyển gia đình">
-													</form>
-												</ul>
-											</li>
-										</ul>
-									</div>
-									<p class = "name">Lê Thị Hoài Trang - 23</p>
-								</td>
-							</tr>
-							</tbody>
-						</table>
+					<div class="group-body">
+					    <div class="family-body">
+					        <div class="family-container">
+					            <h4>Gia Đình 1</h4>
+					            <p class= "family-name">Trần Nhân Tông</p>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
+					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
+					        </div>
+                            <div class="family-container">
+					            <p class= "family-name">Trần Thánh Tông</p>
+                                <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
+					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
+					        </div>
+                            <div class="family-container">
+					            <p class= "family-name">Trần Thánh Tông</p>
+                                <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
+					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
+					        </div>
+					    </div>
+					    <div class="family-body">
+                            <div class="family-container">
+					            <h4>Gia Đình 2</h4>
+					            <p class= "family-name">Trần Nhân Tông</p>
+                                <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
+					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
+					        </div>
+                            <div class="family-container">
+					            <p class= "family-name">Trần Thánh Tông</p>
+                                <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
+					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
+					        </div>
+                            <div class="family-container">
+					            <p class= "family-name">Trần Thánh Tông</p>
+                                <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
+					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
+					        </div>
+					    </div>
+                        <div class="family-body">
+                            <div class="family-container">
+					            <h4>Gia Đình 3</h4>
+					            <p class= "family-name">Trần Nhân Tông</p>
+                                <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
+					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
+					        </div>
+                            <div class="family-container">
+					            <p class= "family-name">Trần Thánh Tông</p>
+                                <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
+					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
+					        </div>
+                            <div class="family-container">
+					            <p class= "family-name">Trần Thánh Tông</p>
+                                <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
+					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
+					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
+					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
+					        </div>
+					    </div>
 					</div>
 				</div>
 			</div>

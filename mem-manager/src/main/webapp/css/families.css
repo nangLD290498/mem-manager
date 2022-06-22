@@ -8,4 +8,38 @@
 .dop{
     padding-right: 10px;
 }
+.group-body{
+        background-color: white;
+        overflow: auto;
+        white-space: nowrap;
+        padding-left: 18px;
+        padding-right: 18px;
+        padding-bottom: 25px;
+}
+.family-body{
+        border-left: 1px solid #adb5bd;;
+        padding-left: 14px;
+        width: auto;
+        display: inline-block;
+}
+.family-container{
+    display: inline-block;
+    width: 200px;
+}
+.name{
+    margin-bottom: 5px;
+    margin-left:0px;
+    font-size: 0.875rem;
+}
+.family-name{
+        font-weight: 600;
+        margin-bottom: 20px;
+        font-size: 0.875rem;
+        margin-top: 25px;
+}
 
+.family-container h4{
+    margin-bottom: 15px;
+    margin-top: 5px;
+    font-size: 0.875rem;
+}

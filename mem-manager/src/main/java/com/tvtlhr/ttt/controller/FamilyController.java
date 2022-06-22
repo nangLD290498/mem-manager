@@ -10,4 +10,9 @@ public class FamilyController {
     public String getAddNewMemberPage(){
         return "families";
     }
+
+    @GetMapping("/iniFamily")
+    public String initFamilyPage(){
+        return "iniFamily";
+    }
 }
