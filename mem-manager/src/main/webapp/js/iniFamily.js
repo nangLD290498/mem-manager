@@ -72,3 +72,28 @@ function fixStepIndicator(n) {
   //... and adds the "active" class on the current step:
   x[n].className += " active";
 }
+
+
+function changeInput(ele){
+        var number = ele.value;
+        console.log(number);
+        var ageRage = document.getElementById("age-range");
+        var familyQuantity = document.getElementById("family-quantity");
+        var innerHtmlAgeRange = "";
+        var innerHtmlFQ = "";
+		for (let i = 1; i <= number ; i++) {
+		    // age Range
+            var ageRangeInput = '<span>' +
+                            '<p><input type="number" name="startAge" class="age-range" placeholder="Độ tuổi bắt đầu nhóm '+ i +'" min="10"  max="20"/>' +
+                            '<input type="number" name="endAge" "class="age-range right" placeholder="Độ tuổi kết thúc nhóm '+ i +'" min="10"  max="20"/></p>' +
+                       '</span>';
+            innerHtmlAgeRange +=   ageRangeInput;
+            // family quantity
+            var fqHtml = '<p><input type="number" name="familyCount" placeholder="Số lượng gia đình của nhóm '+ i +'" min="1"  class="number-group"/></p>';
+            innerHtmlFQ +=fqHtml;
+        }
+
+        ageRage.innerHTML = innerHtmlAgeRange;
+        familyQuantity.innerHTML = innerHtmlFQ;
+
+ }

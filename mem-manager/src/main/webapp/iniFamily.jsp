@@ -20,26 +20,26 @@
   <%@include file="includedJsp/sideBar.jsp" %>
   <div id="layoutSidenav_content">
     <main>
-      <form id="regForm" action="/familyMgtPage">
+      <form id="regForm" action="/processFamily" method="POST">
           <h1>Chia gia đình</h1>
           <!-- One "tab" for each step in the form: -->
           <div class="tab">
-              <p><input type="number" placeholder="Số lượng nhóm" min="1" class="number-group"/></p>
+              <p><input type="number" name="groupCount" onChange="changeInput(this);" placeholder="Số lượng nhóm" min="1" class="number-group"/></p>
           </div>
-          <div class="tab">
+          <div class="tab" id="age-range">
               <span>
-                  <p><input type="number" class="age-range" placeholder="Độ tuổi bắt đầu nhóm 1" min="10"/>
-                  <input type="number"class="age-range right" placeholder="Độ tuổi kết thúc nhóm 1"/></p>
+                  <p><input type="number" class="age-range" placeholder="Độ tuổi bắt đầu nhóm 1" min="10"  max="20"/>
+                  <input type="number"class="age-range right" placeholder="Độ tuổi kết thúc nhóm 1" min="10"  max="20"/></p>
               </span>
               <span>
-                  <p><input type="number" class="age-range" placeholder="Độ tuổi bắt đầu nhóm 2"/>
-                  <input type="number"class="age-range right" placeholder="Độ tuổi kết thúc nhóm 2" max ="20"/></p>
+                  <p><input type="number" class="age-range" placeholder="Độ tuổi bắt đầu nhóm 2" min="10"  max="20"/>
+                  <input type="number"class="age-range right" placeholder="Độ tuổi kết thúc nhóm 2" min="10"  max="20"/></p>
               </span>
           </div>
-          <div class="tab">
-              <p><input type="number" placeholder="Số lượng gia đình của nhóm 1" min="1" class="number-group"/></p>
-              <p><input type="number" placeholder="Số lượng gia đình của nhóm 2" min="1" class="number-group"/></p>
-              <p><input type="number" placeholder="Số lượng gia đình của nhóm 3" min="1" class="number-group"/></p>
+          <div class="tab" id="family-quantity">
+              <p><input type="number" placeholder="Số lượng gia đình của nhóm 1" min="1"  class="number-group"/></p>
+              <p><input type="number" placeholder="Số lượng gia đình của nhóm 2" min="1"  class="number-group"/></p>
+              <p><input type="number" placeholder="Số lượng gia đình của nhóm 3" min="1"  class="number-group"/></p>
           </div>
           <div style="overflow:auto;">
               <div style="float:right;">

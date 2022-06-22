@@ -8,20 +8,21 @@ import java.util.List;
 
 @Entity
 @Data
-public class Family {
-
+public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int familyId;
+    private int groupId;
 
-    @ManyToOne
-    @JoinColumn(name="groupId", nullable = true)
-    private Group group;
+    @OneToMany(mappedBy = "group")
+    private List<Family> families;
 
     @Column
     @NotNull
-    private String name;
+    private String groupName;
 
-    @OneToMany(mappedBy="family")
-    private List<Member> members;
+    @Column
+    private Integer startAge;
+
+    @Column
+    private Integer endAge;
 }
