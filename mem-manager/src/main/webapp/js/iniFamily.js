@@ -74,7 +74,7 @@ function fixStepIndicator(n) {
 }
 
 
-function changeInput(ele){
+function changeInput(ele, min, max){
         var number = ele.value;
         console.log(number);
         var ageRage = document.getElementById("age-range");
@@ -84,8 +84,8 @@ function changeInput(ele){
 		for (let i = 1; i <= number ; i++) {
 		    // age Range
             var ageRangeInput = '<span>' +
-                            '<p><input type="number" name="startAge" class="age-range" placeholder="Độ tuổi bắt đầu nhóm '+ i +'" min="10"  max="20"/>' +
-                            '<input type="number" name="endAge" "class="age-range right" placeholder="Độ tuổi kết thúc nhóm '+ i +'" min="10"  max="20"/></p>' +
+                            '<p><input type="number" name="startAge" class="age-range" placeholder="Độ tuổi bắt đầu nhóm '+ i +'" min="'+ min +'"  max="'+max+ '"/>' +
+                            '<input type="number" name="endAge" style="width: 49%;" id="right" "class="age-range" placeholder="Độ tuổi kết thúc nhóm '+ i +'"   min="'+ min +'"  max="'+max+ '"/></p>' +
                        '</span>';
             innerHtmlAgeRange +=   ageRangeInput;
             // family quantity

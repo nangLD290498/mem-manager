@@ -24,3 +24,28 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+
+function filterFamily(){
+    //CHECK NHOM TRỐNG -> ẨN
+    var groupButtons = document.getElementsByClassName("btn-primary");
+
+    for (let i = 0; i < groupButtons.length; i++) {
+        var familyButtons = groupButtons[i].getElementsByTagName("input");
+        var check = true;
+        for (let j = 0; j < familyButtons.length; j++) {
+            if(familyButtons[j].checked){
+                check =false;
+                break;
+            }
+
+        }
+        var groupName = groupButtons[i].id;
+        var group = document.getElementById(groupName);
+        if(check){
+            group.style.display = "none";
+        }else{
+            group.style.display = "inline-block";
+        }
+    }
+
+ }

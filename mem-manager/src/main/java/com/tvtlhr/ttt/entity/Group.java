@@ -6,14 +6,15 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Entity
+@Entity(name = "family_group")
 @Data
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int groupId;
+    private int id;
 
-    @OneToMany(mappedBy = "group")
+    @OneToMany(cascade = {CascadeType.ALL}, targetEntity = Family.class)
+    @JoinColumn(name = "group_id", referencedColumnName = "id")
     private List<Family> families;
 
     @Column

@@ -34,147 +34,63 @@
 				<div class="card mb-4">
 					<div class="card-header">
 						<div class= "search-left">
-                            <form action="searchMembers" id= "form-family">
-                                <div class="drop">
-                                  <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Gia Đình 1
-                                    <span class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
-                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
-                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
-                                    </ul>
-                                  </div>
-                                </div>&nbsp;&nbsp;&nbsp;
-                                <div class="drop">
-                                  <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Gia Đình 2
-                                    <span class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
-                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
-                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
-                                    </ul>
-                                  </div>
-                                </div>&nbsp;&nbsp;&nbsp;
-                                <div class="drop">
-                                  <div class="dropdown">
-                                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Gia Đình 3
-                                    <span class="caret"></span></button>
-                                    <ul class="dropdown-menu">
-                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
-                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
-                                      <li>&nbsp;&nbsp;<input type="checkbox" name="vehicle3">&nbsp;HTML</li>
-                                    </ul>
-                                  </div>
-                                </div>&nbsp;&nbsp;&nbsp;
-                                <input type="submit" value="Hiển thị" class="btn-submit">
+                            <form id= "form-family">
+                                <c:if test="${not empty groups}">
+                                    <c:forEach items="${groups}" var="item">
+                                        <div class="drop">
+                                          <div class="dropdown">
+                                            <button class="btn btn-primary dropdown-toggle" id="${item.groupName}" type="button" data-toggle="dropdown">${item.groupName}
+                                            <span class="caret"></span></button>
+                                            <ul class="dropdown-menu">
+                                                <c:if test="${not empty item.families}">
+                                                    <c:forEach items="${item.families}" var="family">
+                                                        <li>&nbsp;&nbsp;<input type="checkbox" name="${family.name}">&nbsp;${family.name}</li>
+                                                    </c:forEach>
+                                                </c:if>
+                                            </ul>
+                                          </div>
+                                        </div>&nbsp;&nbsp;&nbsp;
+                                    </c:forEach>
+                                </c:if>
+
+                                <button onclick="filterFamily()" class="btn-submit">Hiển thị</button>
                             </form>
 						</div>
 						<div class = "search-code">
-							<i class="fa fa-gear" id="setting-icon" ></i>
+                            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-gear" id="setting-icon" ></i></a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <li><a class="dropdown-item" href="#!">Xuất excel</a></li>
+                                        <li><a class="dropdown-item" href="/getParam">Chia gia đình</a></li>
+                                        <li><a class="dropdown-item" href="">Sửa tên gia đình</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+
 						</div>
 					</div>
 					<div class="group-body">
-					    <div class="family-body">
-					        <div class="family-container">
-					            <h4>Gia Đình 1</h4>
-					            <p class= "family-name">Trần Nhân Tông</p>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
-					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
-					        </div>
-                            <div class="family-container">
-					            <p class= "family-name">Trần Thánh Tông</p>
-                                <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
-					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
-					        </div>
-                            <div class="family-container">
-					            <p class= "family-name">Trần Thánh Tông</p>
-                                <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
-					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
-					        </div>
-					    </div>
-					    <div class="family-body">
-                            <div class="family-container">
-					            <h4>Gia Đình 2</h4>
-					            <p class= "family-name">Trần Nhân Tông</p>
-                                <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
-					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
-					        </div>
-                            <div class="family-container">
-					            <p class= "family-name">Trần Thánh Tông</p>
-                                <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
-					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
-					        </div>
-                            <div class="family-container">
-					            <p class= "family-name">Trần Thánh Tông</p>
-                                <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
-					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
-					        </div>
-					    </div>
-                        <div class="family-body">
-                            <div class="family-container">
-					            <h4>Gia Đình 3</h4>
-					            <p class= "family-name">Trần Nhân Tông</p>
-                                <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
-					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
-					        </div>
-                            <div class="family-container">
-					            <p class= "family-name">Trần Thánh Tông</p>
-                                <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
-					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
-					        </div>
-                            <div class="family-container">
-					            <p class= "family-name">Trần Thánh Tông</p>
-                                <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn An</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Đức Năng</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Thị Hoài Trang</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Văn Thành</div>
-					            <div class="name"><i class='fas fa-edit'></i> Lê Văn Biền</div>
-					            <div class="name"><i class='fas fa-edit'></i> Nguyễn Thị Luyện</div>
-					            <div class="name"><i class='fas fa-edit'></i> Cao Thị Lơn</div>
-					        </div>
-					    </div>
+					    <c:if test="${not empty groups}">
+                            <c:forEach items="${groups}" var="item">
+                                <div class="family-body" id="${item.groupName}">
+                                    <h4>${item.groupName}</h4>
+                                    <c:if test="${not empty item.families}">
+                                        <c:forEach items="${item.families}" var="family">
+                                            <div class="family-container" id="${family.name}">
+                                                <p class= "family-name">${family.name}</p>
+                                                <c:if test="${not empty family.members}">
+                                                    <c:forEach items="${family.members}" var="member">
+                                                        <div class="name"><i class='fas fa-edit'></i>${member.name}</div>
+                                                    </c:forEach>
+                                                </c:if>
+                                            </div>
+                                        </c:forEach>
+                                    </c:if>
+                                </div>
+					        </c:forEach>
+					    </c:if>
+
 					</div>
 				</div>
 			</div>

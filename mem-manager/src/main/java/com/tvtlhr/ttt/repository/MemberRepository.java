@@ -46,4 +46,9 @@ public interface MemberRepository extends JpaRepository<Member, Integer>{
                        @Param("relativePhoneNumber") String relativePhoneNumber
                        );
 
+    List<Member> findByAgeBetweenOrderByGenderAscAgeDesc(int startAge, int endAge);
+
+    Member findTop1ByOrderByAgeDesc();
+    Member findTop1ByOrderByAgeAsc();
+
 }

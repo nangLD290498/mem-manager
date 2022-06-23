@@ -20,21 +20,14 @@
   <%@include file="includedJsp/sideBar.jsp" %>
   <div id="layoutSidenav_content">
     <main>
-      <form id="regForm" action="/processFamily" method="POST">
+      <form id="regForm" action="/processFamily?groupCount=${groupCount}&startAge=${startAge}&endAge=${endAge}&familyCount=${familyCount}">
           <h1>Chia gia đình</h1>
           <!-- One "tab" for each step in the form: -->
           <div class="tab">
-              <p><input type="number" name="groupCount" onChange="changeInput(this);" placeholder="Số lượng nhóm" min="1" class="number-group"/></p>
+              <p><input type="number" name="groupCount" onChange="changeInput(this,${min},${max});" placeholder="Số lượng nhóm" min="1" class="number-group"/></p>
           </div>
           <div class="tab" id="age-range">
-              <span>
-                  <p><input type="number" class="age-range" placeholder="Độ tuổi bắt đầu nhóm 1" min="10"  max="20"/>
-                  <input type="number"class="age-range right" placeholder="Độ tuổi kết thúc nhóm 1" min="10"  max="20"/></p>
-              </span>
-              <span>
-                  <p><input type="number" class="age-range" placeholder="Độ tuổi bắt đầu nhóm 2" min="10"  max="20"/>
-                  <input type="number"class="age-range right" placeholder="Độ tuổi kết thúc nhóm 2" min="10"  max="20"/></p>
-              </span>
+              <!-- age-range -->
           </div>
           <div class="tab" id="family-quantity">
               <p><input type="number" placeholder="Số lượng gia đình của nhóm 1" min="1"  class="number-group"/></p>

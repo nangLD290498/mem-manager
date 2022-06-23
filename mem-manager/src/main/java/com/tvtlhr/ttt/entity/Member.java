@@ -14,7 +14,7 @@ public class Member {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name="familyId", nullable = true)
+    @JoinColumn(name="family_id", nullable = true, referencedColumnName = "id")
     private Family family;
 
     @Column(unique = true)

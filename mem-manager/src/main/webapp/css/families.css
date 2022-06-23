@@ -38,8 +38,11 @@
         margin-top: 25px;
 }
 
-.family-container h4{
-    margin-bottom: 15px;
-    margin-top: 5px;
-    font-size: 0.875rem;
+.family-body h4{
+        margin-bottom: 1px;
+        margin-top: 5px;
+        font-size: 18px;
+}
+.dropdown-toggle::after {
+ display:none;
 }
