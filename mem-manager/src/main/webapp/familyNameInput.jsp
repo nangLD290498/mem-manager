@@ -11,6 +11,7 @@
   <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
   <link href="css/styles.css" rel="stylesheet" />
   <link href="css/details.css" rel="stylesheet" />
+  <link href="css/familiName.css" rel="stylesheet" />
   <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
@@ -22,10 +23,26 @@
       <div class="container-fluid px-4">
         <h1 class="mt-4">Nhập tên gia đình</h1><br>
         <div>
-          <form action="">
-            <input type="text" id="fname" name="fname" value="Nguyễn Thái Học"><br><br>
+          <form action="processEditFamilyName">
+                    <div class="group-body">
+					    <c:if test="${not empty groups}">
+                            <c:forEach items="${groups}" var="item">
+                                <div class="family-body" id="${item.id}_group">
+                                    <br><label>Tên nhóm</label> <input type="text" class="input-name" name="groupName" value="${item.groupName}"><br>
+                                    <c:if test="${not empty item.families}">
+                                        <c:forEach items="${item.families}" var="family">
+                                            <div class="family-container" id="${family.id}_container">
+                                                <label>Tên gia đình</label><input type="text" class="input-name family" id="fname" name="familyName" value="${family.name}">
+                                            </div>
+                                        </c:forEach>
+                                    </c:if>
+                                </div>
+					        </c:forEach>
+					    </c:if>
 
-            <input type="submit" value="Xong">
+					</div>
+
+            <br><input type="submit" value="Xong">
           </form>
         </div>
       </div>

@@ -8,7 +8,7 @@
                         Trang Chủ
                     </a>
                     <div class="sb-sidenav-menu-heading">Addons</div>
-                    <a class="nav-link" href="/familyMgtPage">
+                    <a class="nav-link" href="/familyMgt">
                         <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                         Chia gia đình
                     </a>

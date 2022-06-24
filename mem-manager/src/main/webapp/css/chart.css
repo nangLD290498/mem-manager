@@ -25,6 +25,7 @@ th, td{
 }
 .name{
 	float:left;
+	width: 100%;
 }
 .edit-btn{
 	float:left;

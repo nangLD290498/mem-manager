@@ -1,6 +1,7 @@
 package com.tvtlhr.ttt.entity;
 
 import lombok.Data;
+import lombok.ToString;
 import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
@@ -15,6 +16,7 @@ public class Member {
 
     @ManyToOne
     @JoinColumn(name="family_id", nullable = true, referencedColumnName = "id")
+    @ToString.Exclude
     private Family family;
 
     @Column(unique = true)

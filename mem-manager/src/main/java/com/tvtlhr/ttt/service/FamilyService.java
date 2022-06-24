@@ -9,6 +9,7 @@ public interface FamilyService {
 
     int getMaxAge();
 
+    void editFamilyAndGroupName(List<String> groupNames, List<String> familyNames);
     List<Group> getAllGroups();
 
     void processFamily(Integer groupCount, List<Integer> startAge, List<Integer> endAge, List<Integer> familyCount);

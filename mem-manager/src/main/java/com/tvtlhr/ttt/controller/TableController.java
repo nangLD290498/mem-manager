@@ -99,7 +99,8 @@ public class TableController {
     }
 
     @GetMapping(value = "/updateMemPage")
-    public ModelAndView updateMember(@RequestParam int id, @RequestParam(required = false) String existed){
+    public ModelAndView updateMember(@RequestParam int id, @RequestParam(required = false) String existed,
+            @RequestParam(required = false) String familyMgt){
         ModelAndView mv = new ModelAndView("editMem");
         Optional<Member> member =  memberService.findByID(id);
         if (member.isPresent()) {
@@ -109,6 +110,7 @@ public class TableController {
             return new ModelAndView("tables");
         }
         if(existed !=null && existed.equals("true")) mv.addObject("existed", "true");
+        if(familyMgt !=null && familyMgt.equals("true")) mv.addObject("familyMgt", "true");
         return mv;
     }
 
@@ -116,6 +118,7 @@ public class TableController {
     public ModelAndView doUpdateMember(
             @Validated @ModelAttribute("member")Member member,
             @RequestParam String isAtending,
+            @RequestParam(required = false) String familyMgt,
             BindingResult result){
         ModelAndView mv = new ModelAndView();
         if(result.hasErrors()){
@@ -126,7 +129,13 @@ public class TableController {
         boolean isUpdate = memberService.updateMember(member);
 
         if(isUpdate) {
-            mv.setViewName("redirect:/members?code="+member.getCode());
+            logger.info("familyMgt " + familyMgt);
+            if(familyMgt != null && familyMgt.equals("true")){
+                mv.setViewName("redirect:/familyMgt");
+            }else{
+                mv.setViewName("redirect:/members?code="+member.getCode());
+            }
+
             mv.addObject("message", "Chỉnh sửa thành công khóa sinh "  + member.getName());
         }
         else {

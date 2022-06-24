@@ -21,7 +21,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
-<body class="sb-nav-fixed">
+<body class="sb-nav-fixed" onLoad="pageLoading()">
 <%@include file="includedJsp/header.jsp" %>
 <div id="layoutSidenav">
 	<%@include file="includedJsp/sideBar.jsp" %>
@@ -34,17 +34,17 @@
 				<div class="card mb-4">
 					<div class="card-header">
 						<div class= "search-left">
-                            <form id= "form-family">
+                            <div id= "form-family">
                                 <c:if test="${not empty groups}">
                                     <c:forEach items="${groups}" var="item">
                                         <div class="drop">
                                           <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle" id="${item.groupName}" type="button" data-toggle="dropdown">${item.groupName}
+                                            <button class="btn btn-primary dropdown-toggle btn-group-family" id="${item.id}" type="button" data-toggle="dropdown">${item.groupName}
                                             <span class="caret"></span></button>
-                                            <ul class="dropdown-menu">
+                                            <ul class="dropdown-menu" id="${item.id}_dropdown">
                                                 <c:if test="${not empty item.families}">
                                                     <c:forEach items="${item.families}" var="family">
-                                                        <li>&nbsp;&nbsp;<input type="checkbox" name="${family.name}">&nbsp;${family.name}</li>
+                                                        <li>&nbsp;&nbsp;<input type="checkbox" class="family-btn" id="${family.id}_checkbox" name="${family.name}"/>&nbsp;${family.name}</li>
                                                     </c:forEach>
                                                 </c:if>
                                             </ul>
@@ -54,7 +54,7 @@
                                 </c:if>
 
                                 <button onclick="filterFamily()" class="btn-submit">Hiển thị</button>
-                            </form>
+                            </div>
 						</div>
 						<div class = "search-code">
                             <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
@@ -63,7 +63,7 @@
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                         <li><a class="dropdown-item" href="#!">Xuất excel</a></li>
                                         <li><a class="dropdown-item" href="/getParam">Chia gia đình</a></li>
-                                        <li><a class="dropdown-item" href="">Sửa tên gia đình</a></li>
+                                        <li><a class="dropdown-item" href="/editFamilyName">Sửa tên gia đình</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -73,15 +73,15 @@
 					<div class="group-body">
 					    <c:if test="${not empty groups}">
                             <c:forEach items="${groups}" var="item">
-                                <div class="family-body" id="${item.groupName}">
+                                <div class="family-body" id="${item.id}_group">
                                     <h4>${item.groupName}</h4>
                                     <c:if test="${not empty item.families}">
                                         <c:forEach items="${item.families}" var="family">
-                                            <div class="family-container" id="${family.name}">
+                                            <div class="family-container" id="${family.id}_container">
                                                 <p class= "family-name">${family.name}</p>
                                                 <c:if test="${not empty family.members}">
                                                     <c:forEach items="${family.members}" var="member">
-                                                        <div class="name"><i class='fas fa-edit'></i>${member.name}</div>
+                                                        <p class="name"><a href= "updateMemPage?id=${member.id}&familyMgt=true"><i class='fas fa-edit'></i></a>${member.name}</p>
                                                     </c:forEach>
                                                 </c:if>
                                             </div>
@@ -99,9 +99,53 @@
 	</div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script src="js/scripts.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
 <script src="js/datatables-simple-demo.js"></script>
+<script src="js/scripts.js"></script>
+<script>
+function filterFamily(){
+    //CHECK NHOM TRỐNG -> ẨN
+    console.log("check nhóm");
+    var groupButtons = document.getElementsByClassName("btn-group-family");
 
+    for (let i = 0; i < groupButtons.length; i++) {
+        var familydropdown = document.getElementById(groupButtons[i].id+"_dropdown");
+
+        var familyButtons = familydropdown.getElementsByTagName("input");
+        var check = true;
+
+        for (let j = 0; j < familyButtons.length; j++) {
+
+            if(familyButtons[j].checked){
+                check =false;
+                var familyId = familyButtons[j].id.slice(0,-9);
+                console.log(familyId + " oooo");
+                var familyCotainer = document.getElementById(familyId+"_container");
+                console.log(familyCotainer + " ttt");
+                familyCotainer.style.display = "inline-block";
+            }else{
+                var familyId = familyButtons[j].id.slice(0,-9);
+                                var familyCotainer = document.getElementById(familyId+"_container");
+                                familyCotainer.style.display = "none";
+            }
+        }
+        var groupId = groupButtons[i].id;
+        var group = document.getElementById(groupId+"_group");
+
+        if(check){
+            group.style.display = "none";
+        }else{
+            group.style.display = "inline-block";
+        }
+    }
+ }
+
+function pageLoading(){
+    var groups = document.getElementsByClassName("family-body");
+    for (let j = 0; j < groups.length; j++) {
+        groups[j].style.display = "none";
+    }
+ }
+</script>
 </body>
 </html>

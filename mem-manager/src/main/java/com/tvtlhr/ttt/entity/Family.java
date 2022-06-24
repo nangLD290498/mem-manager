@@ -1,6 +1,7 @@
 package com.tvtlhr.ttt.entity;
 
 import lombok.Data;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -17,6 +18,7 @@ public class Family {
 
     @ManyToOne
     @JoinColumn(name="group_id", nullable = true, referencedColumnName = "id")
+    @ToString.Exclude
     private Group group;
 
     @Column
@@ -25,5 +27,6 @@ public class Family {
 
     @OneToMany( cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "family_id", referencedColumnName = "id")
+    @ToString.Exclude
     private List<Member> members;
 }

@@ -42,6 +42,24 @@ public class FamilyServiceImpl implements FamilyService {
     }
 
     @Override
+    public void editFamilyAndGroupName(List<String> groupNames, List<String> familyNames) {
+        List<Group> groups = groupRepository.findAll();
+
+        int count = 0;
+        for(int i =0; i<groups.size();i++){
+            groups.get(i).setGroupName(groupNames.get(i));
+            List<Family> families = groups.get(i).getFamilies();
+            int index = count;
+            for(int j=0; j< families.size();j++ ){
+                index = count + j;
+                families.get(j).setName(familyNames.get(index));
+            }
+            count += families.size();
+            groupRepository.save(groups.get(i));
+        }
+    }
+
+    @Override
     public List<Group> getAllGroups() {
         return groupRepository.findAll();
     }
@@ -56,6 +74,7 @@ public class FamilyServiceImpl implements FamilyService {
             group.setStartAge(startAge.get(i-1));
             group.setEndAge(endAge.get(i-1));
             // create family
+            logger.info("age range " + startAge.get(i-1) + "||" +endAge.get(i-1));
             List<Member> membersInGroup = membersInGroup(startAge.get(i-1), endAge.get(i-1));
             logger.info(membersInGroup.size() + " || "+membersInGroup.toString());
             List<Family> families = new ArrayList<>();

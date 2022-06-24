@@ -24,6 +24,7 @@
                 <h1 class="mt-4">Chỉnh sửa thông tin khóa sinh</h1>
                 <div>
                     <form action="/updateMember">
+                        <input type="hidden"  value="true" <c:if test="${familyMgt == true}">name="familyMgt"</c:if>  readonly/>
                         <input type="hidden" id="memberID" value="${member.id}" name="id"  readonly/>
                         <p class="error-text"><c:if test="${existed == 'true'}">Hãy thay đổi thông tin để chỉnh sửa</c:if></p>
                         <c:if test="${empty existed}"><p>Thông tin khóa sinh</p></c:if>

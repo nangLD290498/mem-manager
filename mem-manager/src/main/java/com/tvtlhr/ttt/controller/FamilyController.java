@@ -44,6 +44,26 @@ public class FamilyController {
         return mv;
     }
 
+    @GetMapping("/editFamilyName")
+    public ModelAndView editFamilyNamePage()
+    {
+        ModelAndView mv = new ModelAndView("familyNameInput");
+        List<Group> groups = familyService.getAllGroups();
+        mv.addObject("groups", groups);
+        return mv;
+    }
+
+    @GetMapping("/processEditFamilyName")
+    public ModelAndView editFamilyName(
+            @RequestParam List<String> groupName,
+            @RequestParam List<String> familyName
+    )
+    {
+        ModelAndView mv = new ModelAndView("redirect:/familyMgt");
+        familyService.editFamilyAndGroupName(groupName, familyName);
+        return mv;
+    }
+
     @GetMapping("/familyMgt")
     public ModelAndView manageFamilies()
     {

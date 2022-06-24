@@ -74,8 +74,9 @@
                             <thead>
                             <tr>
                                 <th>Tên</th>
-                                <th>Gia đình</th>
                                 <th>SBD</th>
+                                <th>Nhóm</th>
+                                <th>Gia đình</th>
                                 <th>Tuổi</th>
                                 <th>Giới tính</th>
                                 <th>Điểm danh</th>
@@ -85,8 +86,9 @@
                             <tfoot>
                             <tr>
                                 <th>Tên</th>
-                                <th>Gia đình</th>
                                 <th>SBD</th>
+                                <th>Nhóm</th>
+                                <th>Gia đình</th>
                                 <th>Tuổi</th>
                                 <th>Giới tính</th>
                                 <th>Điểm danh</th>
@@ -98,7 +100,16 @@
                                  <c:forEach items="${members}" var="item">
                                     <tr>
                                        <td>${item.name}</td>
+                                       <td>${item.code}</td>
                                        <td>
+                                           <c:if test="${not empty item.family.group}">
+                                                ${item.family.group.groupName}
+                                           </c:if>
+                                           <c:if test="${empty item.family.group}">
+                                                Chưa được xếp
+                                           </c:if>
+                                       </td>
+                                        <td>
                                            <c:if test="${not empty item.family}">
                                                 ${item.family.name}
                                            </c:if>
@@ -106,7 +117,6 @@
                                                 Chưa được xếp
                                            </c:if>
                                        </td>
-                                       <td>${item.code}</td>
                                        <td>${item.age}</td>
                                        <td>${item.gender}</td>
                                        <td>
