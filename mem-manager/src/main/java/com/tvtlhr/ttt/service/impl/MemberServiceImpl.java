@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class MemberServiceImpl implements MemberService {
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    //Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     MemberRepository memberRepository;
 
@@ -132,7 +132,7 @@ public class MemberServiceImpl implements MemberService {
         if(group != null){
             // todo
             families = findFamilyBaseOnQuantity(group);
-            logger.info(families.get(0).getMembers().size() + "||" + families.size());
+            //logger.info(families.get(0).getMembers().size() + "||" + families.size());
             families = findFamilyBaseOnGender(families, gender);
         }
         if(families.size() != 0){
@@ -177,7 +177,7 @@ public class MemberServiceImpl implements MemberService {
         for (Family family: families) {
             List<Member> members = family.getMembers().stream().filter(member -> member.getGender().equals(gender)).collect(Collectors.toList());
             map.put(family, members.size());
-            logger.info(gender+ "||" +members.size());
+            //logger.info(gender+ "||" +members.size());
         }
         int min = new ArrayList<Integer>(map.values()).stream()
                 .mapToInt(v -> v)

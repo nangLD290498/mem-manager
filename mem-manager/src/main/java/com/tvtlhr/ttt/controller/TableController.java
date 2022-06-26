@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 @Controller
 public class TableController {
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    //Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private MemberService memberService;
 
@@ -46,7 +46,7 @@ public class TableController {
         List<Integer> ages = new ArrayList<>();
         members = memberService.getAllMembers();
         ages = members.stream().map(Member::getAge).distinct().collect(Collectors.toList());
-        if(code == null || code.isBlank()){
+        if(code == null || code.isEmpty()){
             // members giữ nguyên
         }else {
             Member member = memberService.getByCode(code);
@@ -56,7 +56,7 @@ public class TableController {
             }
             mv.addObject("param_code", code);
         }
-        logger.info("members " + members.toString());
+        //logger.info("members " + members.toString());
         mv.addObject("members", members);
         mv.addObject("ages", ages);
         if(message !=null) mv.addObject("message", message);
@@ -142,11 +142,11 @@ public class TableController {
             mv.setViewName("editMem");
             return mv;
         }
-        logger.info("isAtending " + isAtending);
+        //logger.info("isAtending " + isAtending);
         boolean isUpdate = memberService.updateMember(member, familyId);
 
         if(isUpdate) {
-            logger.info("familyMgt " + familyMgt);
+            //logger.info("familyMgt " + familyMgt);
             if(familyMgt != null && familyMgt.equals("true")){
                 mv.setViewName("redirect:/familyMgt");
             }else{
@@ -171,7 +171,7 @@ public class TableController {
         List<Member> members = memberService.getAllMembers();
         List<String> ages = members.stream().map(Member::getAgeString).distinct().collect(Collectors.toList());
         mv.addObject("ages", ages);
-        logger.info(age + " || " + gender);
+        //logger.info(age + " || " + gender);
         List<Member> filteredMembers = memberService.searchMembers(gender, age, isAtending);
         mv.addObject("members", filteredMembers);
         mv.addObject("age", age);

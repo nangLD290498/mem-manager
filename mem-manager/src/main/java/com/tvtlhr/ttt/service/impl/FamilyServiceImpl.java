@@ -21,7 +21,7 @@ import java.util.List;
 @Service
 @Transactional
 public class FamilyServiceImpl implements FamilyService {
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    //Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     FamilyRepository familyRepository;
 
@@ -88,15 +88,15 @@ public class FamilyServiceImpl implements FamilyService {
             group.setStartAge(startAge.get(i-1));
             group.setEndAge(endAge.get(i-1));
             // create family
-            logger.info("age range " + startAge.get(i-1) + "||" +endAge.get(i-1));
+           // logger.info("age range " + startAge.get(i-1) + "||" +endAge.get(i-1));
             List<Member> membersInGroup = membersInGroup(startAge.get(i-1), endAge.get(i-1));
-            logger.info(membersInGroup.size() + " || "+membersInGroup.toString());
+            //logger.info(membersInGroup.size() + " || "+membersInGroup.toString());
             List<Family> families = new ArrayList<>();
             int numberOfFamilies = familyCount.get(i-1);
             for(int j= 1; j<= numberOfFamilies; j++){
                 Family family = new Family();
                 family.setName("Gia đình " + j);
-                logger.info("Gia đình " + j);
+                //logger.info("Gia đình " + j);
                 List<Member> membersInFamily = new ArrayList<>();
                 for(int k =1; k <= membersInGroup.size(); k++ ){
                     if(k % numberOfFamilies == j || k % numberOfFamilies==0){

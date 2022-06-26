@@ -30,7 +30,7 @@ import java.util.Map;
 
 @Controller
 public class FamilyController {
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    //Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private FamilyService familyService;
 
@@ -161,11 +161,11 @@ public class FamilyController {
         ModelAndView mv = new ModelAndView("redirect:/members");
         File excelFile = utils.convertMultiPartToFile(file);
         List<DowloadObject> dowloadObjectList = iExcelDataService.getExcelDataAsList(excelFile);
-        logger.info(dowloadObjectList.toString());
+        //logger.info(dowloadObjectList.toString());
         boolean saved = false;
         try {
             List<Member> members = familyService.toMember(dowloadObjectList);
-            logger.info(members.toString());
+            //logger.info(members.toString());
             saved = memberService.saveAll(members);
         }catch (Exception e){}
         if(saved) {
