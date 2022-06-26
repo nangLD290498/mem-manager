@@ -29,18 +29,31 @@
                         <p class="error-text"><c:if test="${existed == 'true'}">Hãy thay đổi thông tin để chỉnh sửa</c:if></p>
                         <c:if test="${empty existed}"><p>Thông tin khóa sinh</p></c:if>
                         <label >Họ Tên:</label>
-                        <input type="text" value="${member.name}" name="name"  required /><br><br>
-                        <label>Gia Đình:</label>
-                        <c:if test="${not empty member.family}">
-                            <input type="text" class = "readonly" value="${item.family.name}"  readonly /><br><br>
+                        <input type="text" class="select-family" value="${member.name}" name="name"  required /><br><br>
+                        <label>Nhóm:</label>
+                        <c:if test="${not empty member.family.group}">
+                            <input type="text" class = "readonly select-family" value="${member.family.group.groupName}" readonly /><br><br>
                         </c:if>
-                        <c:if test="${empty member.family}">
-                             <input type="text" class = "readonly" value="Chưa được xếp" readonly /><br><br>
+                        <c:if test="${empty member.family.group}">
+                            <input type="text" class = "readonly select-family" value="Chưa được xếp" readonly /><br><br>
+                        </c:if>
+                        <label>Gia Đình:</label>
+                        <c:if test="${not empty families}">
+                        <select name="familyId" class="select-family">
+
+                                <c:forEach items="${families}" var="fa">
+                                    <option value="${fa.id}" <c:if test="${fa.name == member.family.name}"> selected</c:if>>${fa.name}</option>
+                                </c:forEach>
+
+                        </select><br><br>
+                        </c:if>
+                        <c:if test="${empty families}">
+                             <input type="text" class = "readonly select-family" value="Chưa được xếp" readonly /><br><br>
                         </c:if>
                         <label>SBD:</label>
-                        <input type="text" class = "readonly" value="${member.code}" name="code" readonly/ ><br><br>
+                        <input type="text" class = "readonly select-family" value="${member.code}" name="code" readonly/ ><br><br>
                         <label>Tuổi:</label>
-                        <input type="number" value="${member.age}" name = "age" required /><br><br>
+                        <input type="number" value="${member.age}" class="select-family" name = "age" required /><br><br>
                         <label>Giới Tính:</label>
                         <input type="radio" <c:if test="${member.gender == 'Nam'}">checked</c:if> id="lmale" name="gender" value="Nam" /> Nam &nbsp;&nbsp;
                         <input type="radio" <c:if test="${member.gender == 'Nữ'}">checked</c:if> id="lfemale" name="gender" value="Nữ"> Nữ<br><br>
@@ -48,13 +61,13 @@
                         <input type="radio" <c:if test="${isAtending == 'false'}">checked</c:if>  name="isAtending" value="false"> Không tham gia &nbsp;&nbsp;
                         <input type="radio" <c:if test="${isAtending == 'true'}">checked</c:if>  name="isAtending" value="true"> Tham gia <br><br>
                         <label>Điện thoại:</label>
-                        <input type="text" value="${member.phoneNumber}" name=phoneNumber ><br><br>
+                        <input type="text" class="select-family" value="${member.phoneNumber}" name=phoneNumber ><br><br>
                         <label>Tên người thân:</label>
-                        <input type="text" value="${member.relativeName}" name="relativeName"><br><br>
+                        <input type="text" class="select-family" value="${member.relativeName}" name="relativeName"><br><br>
                         <label>Mối quan hệ:</label>
-                        <input type="text" value="${member.relationship}" name = "relationship"><br><br>
+                        <input type="text" class="select-family" value="${member.relationship}" name = "relationship"><br><br>
                         <label>Điện thoại:</label>
-                        <input type="text" value="${member.relativePhoneNumber}" name = "relativePhoneNumber"><br><br>
+                        <input type="text" class="select-family" value="${member.relativePhoneNumber}" name = "relativePhoneNumber"><br><br>
 
                         <input type="submit" onclick="confirmPopUp('bạn đang chỉnh sửa thông tin khóa sinh !!')" value="Xong">
                     </form>

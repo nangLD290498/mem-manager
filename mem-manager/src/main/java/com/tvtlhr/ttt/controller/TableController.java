@@ -1,7 +1,11 @@
 package com.tvtlhr.ttt.controller;
 
+import com.tvtlhr.ttt.entity.DowloadObject;
+import com.tvtlhr.ttt.entity.Family;
 import com.tvtlhr.ttt.entity.Member;
+import com.tvtlhr.ttt.service.FamilyService;
 import com.tvtlhr.ttt.service.MemberService;
+import com.tvtlhr.ttt.utils.ExcelWriter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -25,6 +30,11 @@ public class TableController {
     @Autowired
     private MemberService memberService;
 
+    @Autowired
+    private FamilyService familyService;
+
+    @Autowired
+    private ExcelWriter writer;
     @Value("${code.value}")
     private String codePrefix;
 
@@ -65,10 +75,14 @@ public class TableController {
         if(result.hasErrors()){
             return new ModelAndView("addNewMem");
         }
-        String code = memberService.createNewMember(member);
-        if(code.contains(codePrefix)) {
-            ModelAndView mv = new ModelAndView("redirect:/members?code=" + code);
-            mv.addObject("message","Đã thêm thành công khóa sinh " + member.getName());
+        Member mem = memberService.createNewMember(member);
+        if(mem != null) {
+            ModelAndView mv = new ModelAndView("redirect:/members?code=" + mem.getCode());
+            if(mem.getFamily() == null) {
+                mv.addObject("message", "Đã thêm thành công khóa sinh " + member.getName());
+            }else{
+                mv.addObject("message", "Đã thêm thành công khóa sinh " + member.getName()+ " và thêm vào gia đình "+ mem.getFamily().getName());
+            }
             return mv;
         } else {
             ModelAndView mv = new ModelAndView("addNewMem");
@@ -103,8 +117,10 @@ public class TableController {
             @RequestParam(required = false) String familyMgt){
         ModelAndView mv = new ModelAndView("editMem");
         Optional<Member> member =  memberService.findByID(id);
+        List<Family> families = familyService.getByGroup(id);
         if (member.isPresent()) {
             mv.addObject("member", member.get());
+            mv.addObject("families", families);
             mv.addObject("isAtending", member.get().getIsAtending());
         } else {
             return new ModelAndView("tables");
@@ -119,6 +135,7 @@ public class TableController {
             @Validated @ModelAttribute("member")Member member,
             @RequestParam String isAtending,
             @RequestParam(required = false) String familyMgt,
+            @RequestParam(required = false) Integer familyId,
             BindingResult result){
         ModelAndView mv = new ModelAndView();
         if(result.hasErrors()){
@@ -126,7 +143,7 @@ public class TableController {
             return mv;
         }
         logger.info("isAtending " + isAtending);
-        boolean isUpdate = memberService.updateMember(member);
+        boolean isUpdate = memberService.updateMember(member, familyId);
 
         if(isUpdate) {
             logger.info("familyMgt " + familyMgt);
@@ -174,6 +191,28 @@ public class TableController {
             message = "Hãy thay đổi cột điểm danh để thực hiện điểm danh";
         }
         mv.addObject("message", message);
+        return mv;
+    }
+
+    @GetMapping(value = "/exportExcel")
+    public ModelAndView exportExcel(HttpServletResponse response){
+        ModelAndView mv = new ModelAndView();
+        List<Member> members = memberService.getAllMembers();
+        List<DowloadObject> dowloadObjects = DowloadObject.fromMember(members);
+        writer.writeToExcelInMultiSheets("khoa_sinh.xlsx", "Tất cả khóa sinh", dowloadObjects, response);
+        return mv;
+    }
+
+    @GetMapping(value = "/deleteAll")
+    public ModelAndView deleteAll(HttpServletResponse response){
+        ModelAndView mv = new ModelAndView("redirect:/members");
+        List<Member> members = memberService.getAllMembers();
+        if(members == null || members.size() == 0){
+            mv.addObject("message", "Không còn khóa sinh nào để thực hiện xóa");
+        }else {
+            memberService.deleteAll();
+            mv.addObject("message", "Đã xóa tất cả các khóa sinh");
+        }
         return mv;
     }
 }

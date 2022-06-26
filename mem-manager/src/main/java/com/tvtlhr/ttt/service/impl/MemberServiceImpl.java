@@ -1,18 +1,21 @@
 package com.tvtlhr.ttt.service.impl;
 
+import com.tvtlhr.ttt.entity.Family;
+import com.tvtlhr.ttt.entity.Group;
 import com.tvtlhr.ttt.entity.Member;
+import com.tvtlhr.ttt.repository.FamilyRepository;
+import com.tvtlhr.ttt.repository.GroupRepository;
 import com.tvtlhr.ttt.repository.MemberRepository;
 import com.tvtlhr.ttt.service.MemberService;
 import com.tvtlhr.ttt.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,7 +26,20 @@ public class MemberServiceImpl implements MemberService {
     MemberRepository memberRepository;
 
     @Autowired
+    FamilyRepository familyRepository;
+
+    @Autowired
+    GroupRepository groupRepository;
+
+    @Autowired
     Utils utils;
+
+    @Override
+    public boolean saveAll(List<Member> members) {
+        if(members == null) return false;
+        List<Member> memList = memberRepository.saveAll(members);
+        return memList.size() !=0;
+    }
 
     @Override
     public void submitAttention(List<Integer> idList) {
@@ -55,7 +71,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public boolean updateMember(Member member) {
+    public boolean updateMember(Member member, Integer familyId) {
+        Optional<Member> origin = memberRepository.findById(member.getId());
+        Family newFamily = null;
+        if(familyId != null) {
+            newFamily = familyRepository.getReferenceById(familyId);
+        }
         if(memberRepository.existsInDB(member.getId(),
                 member.getName(),
                 member.getPhoneNumber(),
@@ -65,7 +86,11 @@ public class MemberServiceImpl implements MemberService {
                 member.getIsAtending(),
                 member.getRelativeName(),
                 member.getRelationship(),
-                member.getRelativePhoneNumber())) return false;
+                member.getRelativePhoneNumber()) &&
+                (origin.get().getFamily() == null ||
+                        familyId == origin.get().getFamily().getId())) return false;
+
+        member.setFamily(newFamily);
         Member mem = memberRepository.save(member);
         return mem != null;
     }
@@ -92,15 +117,77 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public String createNewMember(Member member) {
+    public Member createNewMember(Member member) {
         if(memberRepository.existsMemberByNameAndPhoneNumber(member.getName(), member.getPhoneNumber())){
-            return "null";
+            return null;
         }
         String code = utils.generateCode();
         member.setCode(code);
+        // set family cho member
+        int age = member.getAge();
+        String gender = member.getGender();
+        Group group = findGroup(age);
+        //logger.info("tuổi "+ age+ " thuộc từ "+ group.getStartAge()+" đến "+ group.getEndAge());
+        List<Family> families = new ArrayList<>();
+        if(group != null){
+            // todo
+            families = findFamilyBaseOnQuantity(group);
+            logger.info(families.get(0).getMembers().size() + "||" + families.size());
+            families = findFamilyBaseOnGender(families, gender);
+        }
+        if(families.size() != 0){
+            member.setFamily(families.get(0));
+        }
         memberRepository.save(member);
-        return code;
+        return member;
     }
 
+    @Override
+    public void deleteAll() {
+        memberRepository.deleteAll();
+        groupRepository.deleteAll();
+    }
 
+    private Group findGroup(int age){
+        List<Group> groups = groupRepository.findAll(Sort.by(Sort.Direction.DESC, "endAge"));
+        if(groups == null || groups.size() == 0) return null;
+        if(age > groups.get(0).getEndAge()) return groups.get(0);
+        if(age < groups.get(groups.size()-1).getStartAge()) return groups.get(groups.size()-1);
+        for(int i=0; i<groups.size(); i++){
+            Group g = groups.get(i);
+            if(g.getEndAge() >= age && g.getStartAge() <= age){
+                return g;
+            }
+        }
+        return null;
+    }
+
+    private List<Family> findFamilyBaseOnQuantity(Group group){
+        List<Family> originalFamilies = group.getFamilies();
+        List<Integer> sizes = originalFamilies.stream().map(family -> family.getMembers().size()).collect(Collectors.toList());
+        int min = sizes.stream()
+                .mapToInt(v -> v)
+                .min().orElseThrow(NoSuchElementException::new);
+        return originalFamilies.stream().filter(family -> family.getMembers().size() == min).collect(Collectors.toList());
+    }
+
+    private List<Family> findFamilyBaseOnGender(List<Family> families, String gender){
+        List<Family> results = new ArrayList<>();
+        Map<Family, Integer> map = new HashMap<>();
+        for (Family family: families) {
+            List<Member> members = family.getMembers().stream().filter(member -> member.getGender().equals(gender)).collect(Collectors.toList());
+            map.put(family, members.size());
+            logger.info(gender+ "||" +members.size());
+        }
+        int min = new ArrayList<Integer>(map.values()).stream()
+                .mapToInt(v -> v)
+                .min().orElseThrow(NoSuchElementException::new);
+
+        map.forEach( (k,v) -> {
+            if(v==min){
+                results.add(k);
+            }
+        });
+        return results;
+    }
 }

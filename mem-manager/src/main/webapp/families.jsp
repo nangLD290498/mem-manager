@@ -21,8 +21,29 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
-<body class="sb-nav-fixed" onLoad="pageLoading()">
-<%@include file="includedJsp/header.jsp" %>
+<body class="sb-nav-fixed" >
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+	<!-- Navbar Brand-->
+	<a class="navbar-brand ps-3" >TVTLHR</a>
+	<!-- Sidebar Toggle-->
+	<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+	<!-- Navbar Search-->
+	<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+		<div class="input-group" style = "display: none;">
+			<input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+			<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+		</div>
+	</form>
+	<!-- Navbar-->
+	<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+				<li><a class="dropdown-item" id="excel-export" href="#!">Xuất excel</a></li>
+			</ul>
+		</li>
+	</ul>
+</nav>
 <div id="layoutSidenav">
 	<%@include file="includedJsp/sideBar.jsp" %>
 	<div id="layoutSidenav_content">
@@ -38,8 +59,8 @@
                                 <c:if test="${not empty groups}">
                                     <c:forEach items="${groups}" var="item">
                                         <div class="drop">
-                                          <div class="dropdown">
-                                            <button class="btn btn-primary dropdown-toggle btn-group-family" id="${item.id}" type="button" data-toggle="dropdown">${item.groupName}
+                                          <div class="dropdown" data-toggle="tooltip" title=" từ ${item.startAge} đến ${item.endAge} tuổi">
+                                            <button class="btn btn-primary dropdown-toggle btn-group-family" id="${item.id}" type="button"  data-toggle="dropdown">${item.groupName}
                                             <span class="caret"></span></button>
                                             <ul class="dropdown-menu" id="${item.id}_dropdown">
                                                 <c:if test="${not empty item.families}">
@@ -61,7 +82,6 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-gear" id="setting-icon" ></i></a>
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="#!">Xuất excel</a></li>
                                         <li><a class="dropdown-item" href="/getParam">Chia gia đình</a></li>
                                         <li><a class="dropdown-item" href="/editFamilyName">Sửa tên gia đình</a></li>
                                     </ul>
@@ -73,7 +93,7 @@
 					<div class="group-body">
 					    <c:if test="${not empty groups}">
                             <c:forEach items="${groups}" var="item">
-                                <div class="family-body" id="${item.id}_group">
+                                <div class="family-body" style="display:none;" id="${item.id}_group">
                                     <h4>${item.groupName}</h4>
                                     <c:if test="${not empty item.families}">
                                         <c:forEach items="${item.families}" var="family">
@@ -81,7 +101,17 @@
                                                 <p class= "family-name">${family.name}</p>
                                                 <c:if test="${not empty family.members}">
                                                     <c:forEach items="${family.members}" var="member">
-                                                        <p class="name"><a href= "updateMemPage?id=${member.id}&familyMgt=true"><i class='fas fa-edit'></i></a>${member.name}</p>
+                                                        <p class="name"  <c:if test="${member.gender== 'Nữ'}">style="color: red;"</c:if>>
+                                                            <a id="icon" href= "updateMemPage?id=${member.id}&familyMgt=true">
+                                                                <c:if test="${member.isAtending== 'true'}">
+                                                                    <i class='fas fa-edit'></i>
+                                                                </c:if>
+                                                                <c:if test="${member.isAtending== 'false'}">
+                                                                    <i class='far fa-file'></i>
+                                                                </c:if>
+                                                            </a>
+                                                            ${member.age} - ${member.name}
+                                                        </p>
                                                     </c:forEach>
                                                 </c:if>
                                             </div>
@@ -103,9 +133,16 @@
 <script src="js/datatables-simple-demo.js"></script>
 <script src="js/scripts.js"></script>
 <script>
+
+var param="";
+
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
 function filterFamily(){
     //CHECK NHOM TRỐNG -> ẨN
     console.log("check nhóm");
+    param="";
     var groupButtons = document.getElementsByClassName("btn-group-family");
 
     for (let i = 0; i < groupButtons.length; i++) {
@@ -119,14 +156,19 @@ function filterFamily(){
             if(familyButtons[j].checked){
                 check =false;
                 var familyId = familyButtons[j].id.slice(0,-9);
-                console.log(familyId + " oooo");
+                param = param.concat(familyId + ",");
+                console.log("add-nhóm "+i+":"+ familyId + "||" + param);
                 var familyCotainer = document.getElementById(familyId+"_container");
-                console.log(familyCotainer + " ttt");
                 familyCotainer.style.display = "inline-block";
             }else{
                 var familyId = familyButtons[j].id.slice(0,-9);
-                                var familyCotainer = document.getElementById(familyId+"_container");
-                                familyCotainer.style.display = "none";
+                var familyCotainer = document.getElementById(familyId+"_container");
+                familyCotainer.style.display = "none";
+                if(param.includes(familyId)){
+                     param = param.replace(this.id + ",", "");
+                     console.log("remove-nhóm "+i+": "+ familyId + "||" + param);
+                }else{
+                }
             }
         }
         var groupId = groupButtons[i].id;
@@ -146,6 +188,13 @@ function pageLoading(){
         groups[j].style.display = "none";
     }
  }
+
+ $(document).ready(function() {
+
+     $("#excel-export").click(function() {
+         window.location.href = "/exportFamilyToExcel?familyId=".concat(param.slice(0, -1));
+     });
+ });
 </script>
 </body>
 </html>

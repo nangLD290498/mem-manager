@@ -28,7 +28,7 @@
                                 <div class="card bg-primary text-white mb-4">
                                     <div class="card-body">Chia gia đình</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="charts.html">Đi đến</a>
+                                        <a class="small text-white stretched-link" href="/familyMgt">Đi đến</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -37,7 +37,7 @@
                                 <div class="card bg-warning text-white mb-4">
                                     <div class="card-body">Quản lý khóa sinh</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="tables.html">Đi đến</a>
+                                        <a class="small text-white stretched-link" href="/members">Đi đến</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>

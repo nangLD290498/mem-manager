@@ -21,7 +21,36 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </head>
 <body class="sb-nav-fixed">
-<%@include file="includedJsp/header.jsp" %>
+<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+	<!-- Navbar Brand-->
+	<a class="navbar-brand ps-3" >TVTLHR</a>
+	<!-- Sidebar Toggle-->
+	<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+	<!-- Navbar Search-->
+	<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+		<div class="input-group" style = "display: none;">
+			<input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+			<button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+		</div>
+	</form>
+	<!-- Navbar-->
+	<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+		<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+			<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+				<li><a class="dropdown-item" onclick="confirmPopUp('Bạn có chắc chắn muốn xóa tất cả khóa sinh !!')" href="/deleteAll">Xóa tất cả</a></li>
+				<li><a class="dropdown-item" href="/exportExcel">Xuất excel</a></li>
+				<li onclick="uploadExcel();" class="dropdown-item">Tải lên excel</li>
+				<li><a class="dropdown-item" href="">
+				<form action="/saveExcelTODb" method="post" enctype="multipart/form-data">
+				    <input type="file" name="file" onchange="fileChanged(this);" id="getFile"  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" style="display:none" />
+				    <input type="submit" id="file-submit" value="Submit" style="display:none;"/>
+				</form>
+				</a></li>
+			</ul>
+		</li>
+	</ul>
+</nav>
 <div id="layoutSidenav">
     <%@include file="includedJsp/sideBar.jsp" %>
     <div id="layoutSidenav_content">
@@ -83,18 +112,6 @@
                                 <th>Tùy Chỉnh</th>
                             </tr>
                             </thead>
-                            <tfoot>
-                            <tr>
-                                <th>Tên</th>
-                                <th>SBD</th>
-                                <th>Nhóm</th>
-                                <th>Gia đình</th>
-                                <th>Tuổi</th>
-                                <th>Giới tính</th>
-                                <th>Điểm danh</th>
-                                <th>Tùy Chỉnh</th>
-                            </tr>
-                            </tfoot>
                             <tbody>
                              <c:if test="${not empty members}">
                                  <c:forEach items="${members}" var="item">
@@ -102,20 +119,20 @@
                                        <td>${item.name}</td>
                                        <td>${item.code}</td>
                                        <td>
-                                           <c:if test="${not empty item.family.group}">
-                                                ${item.family.group.groupName}
-                                           </c:if>
-                                           <c:if test="${empty item.family.group}">
-                                                Chưa được xếp
-                                           </c:if>
+                                       <c:if test="${not empty item.family.group}">
+                                            ${item.family.group.groupName}
+                                       </c:if>
+                                       <c:if test="${empty item.family.group}">
+                                            Chưa được chia
+                                       </c:if>
                                        </td>
                                         <td>
-                                           <c:if test="${not empty item.family}">
-                                                ${item.family.name}
-                                           </c:if>
-                                           <c:if test="${empty item.family}">
-                                                Chưa được xếp
-                                           </c:if>
+                                       <c:if test="${not empty item.family}">
+                                            ${item.family.name}
+                                       </c:if>
+                                       <c:if test="${empty item.family}">
+                                            Chưa được chia
+                                       </c:if>
                                        </td>
                                        <td>${item.age}</td>
                                        <td>${item.gender}</td>
@@ -152,5 +169,15 @@
 <script src="js/datatables-simple-demo.js"></script>
 <script src="js/tables-attention.js"></script>
 <script src="js/confirm.js"></script>
+<script>
+function uploadExcel() {
+  document.getElementById('getFile').click();
+
+}
+
+function fileChanged(ele){
+    document.getElementById('file-submit').click();
+}
+</script>
 </body>
 </html>

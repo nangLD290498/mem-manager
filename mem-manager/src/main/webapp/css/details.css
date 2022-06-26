@@ -7,7 +7,7 @@ display: contents;
 .readonly{
     background-color: #dee2e6;
 }
-input[type="text"],  input[type="number"], select{
+input[type="text"],  input[type="number"], select, #select-family{
 	display: inline-block;
     font-weight: 400;
     text-align: left;
@@ -35,4 +35,7 @@ input[type="submit"]{
 
 select{
 	padding-right:25px;
+}
+.select-family{
+    width: 200px !important;
 }

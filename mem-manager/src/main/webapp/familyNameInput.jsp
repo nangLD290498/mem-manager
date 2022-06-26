@@ -21,7 +21,9 @@
   <div id="layoutSidenav_content">
     <main>
       <div class="container-fluid px-4">
-        <h1 class="mt-4">Nhập tên gia đình</h1><br>
+        <h1 class="mt-4">Nhập tên gia đình</h1>
+        <c:if test="${empty message}"><p>Nhập tên nhóm và tên gia đình</p></c:if>
+        <p class="message-text">${message}</p>
         <div>
           <form action="processEditFamilyName">
                     <div class="group-body">

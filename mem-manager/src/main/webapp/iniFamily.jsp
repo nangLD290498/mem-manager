@@ -30,9 +30,7 @@
               <!-- age-range -->
           </div>
           <div class="tab" id="family-quantity">
-              <p><input type="number" placeholder="Số lượng gia đình của nhóm 1" min="1"  class="number-group"/></p>
-              <p><input type="number" placeholder="Số lượng gia đình của nhóm 2" min="1"  class="number-group"/></p>
-              <p><input type="number" placeholder="Số lượng gia đình của nhóm 3" min="1"  class="number-group"/></p>
+              <!-- familyCount -->
           </div>
           <div style="overflow:auto;">
               <div style="float:right;">

@@ -1,5 +1,6 @@
 package com.tvtlhr.ttt.service.impl;
 
+import com.tvtlhr.ttt.entity.DowloadObject;
 import com.tvtlhr.ttt.entity.Family;
 import com.tvtlhr.ttt.entity.Group;
 import com.tvtlhr.ttt.entity.Member;
@@ -7,6 +8,7 @@ import com.tvtlhr.ttt.repository.FamilyRepository;
 import com.tvtlhr.ttt.repository.GroupRepository;
 import com.tvtlhr.ttt.repository.MemberRepository;
 import com.tvtlhr.ttt.service.FamilyService;
+import com.tvtlhr.ttt.utils.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,18 @@ public class FamilyServiceImpl implements FamilyService {
 
     @Autowired
     GroupRepository groupRepository;
+
+    @Autowired
+    Utils utils;
+
+    @Override
+    public List<Family> getByGroup(Integer id) {
+        Member member = memberRepository.getReferenceById(id);
+        if (member.getFamily() == null) return new ArrayList<>();
+        Group group = groupRepository.getReferenceById(member.getFamily().getGroup().getId());
+        List<Family> families = group.getFamilies();
+        return families;
+    }
 
     @Override
     public int getMinAge() {
@@ -108,7 +122,50 @@ public class FamilyServiceImpl implements FamilyService {
         return buffer.toString();
     }
 
+    @Override
+    public Family getById(Integer id) {
+        return familyRepository.getReferenceById(id);
+    }
+
+    @Override
+    public List<Family> getAll() {
+        return familyRepository.findAll();
+    }
+
     List<Member> membersInGroup(Integer startAge, Integer endAge){
         return memberRepository.findByAgeBetweenOrderByGenderAscAgeDesc(startAge, endAge);
+    }
+
+
+    public  List<Member> toMember(List<DowloadObject> dowloadObjects){
+        List<Member> result = new ArrayList<>();
+
+        String code = utils.generateCode();
+        int codeInt = Integer.parseInt(code);
+        for (DowloadObject dowloadObject: dowloadObjects) {
+            Member member = new Member();
+            member.setName(dowloadObject.getTen());
+            member.setAge(dowloadObject.getTuoi());
+            member.setCode(utils.intToStringCode(codeInt));
+            codeInt ++;
+            member.setGender(dowloadObject.getGioi_tinh());
+            member.setPhoneNumber(dowloadObject.getSdt());
+            member.setIsAtending(dowloadObject.getDiem_danh().equals("không tham gia")?"false" : "true");
+            member.setRelativeName(dowloadObject.getTen_nguoi_than());
+            member.setRelationship(dowloadObject.getMoi_quan_he());
+            member.setRelativePhoneNumber(dowloadObject.getSdt_nguoi_than());
+            if(dowloadObject.getGia_dinh() != null && dowloadObject.getNhom() !=null){
+                List<Family> families = familyRepository.findAll();
+                for (Family f: families) {
+                    if(f.getName().equals(dowloadObject.getGia_dinh()) &&
+                            f.getGroup().getGroupName().equals(dowloadObject.getNhom())){
+                        member.setFamily(f);
+                        break;
+                    }
+                }
+            }
+            result.add(member);
+        }
+        return result;
     }
 }

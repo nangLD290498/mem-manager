@@ -7,11 +7,12 @@ import java.util.Optional;
 
 public interface MemberService {
 
+    boolean saveAll(List<Member> members);
     void submitAttention(List<Integer> idList);
 
     List<Member> searchMembers(String gender, String age, String isAtending);
 
-    boolean updateMember(Member member);
+    boolean updateMember(Member member, Integer familyId);
 
     Optional<Member> findByID(int id);
 
@@ -21,5 +22,7 @@ public interface MemberService {
 
     List<Member> getAllMembers();
 
-    String createNewMember(Member member);
+    Member createNewMember(Member member);
+
+    void deleteAll();
 }

@@ -25,9 +25,6 @@ display: inline-flex;
 	margin-left: 10px;
 }
 
-.form-control, .dataTable-input {
-	display: none;
-}
 table {
     table-layout: fixed;
 }
@@ -84,4 +81,13 @@ table .form-control {
 }
 table .form-control.error {
     border-color: #f50000;
+}
+table{
+    table-layout: auto;
+}
+.dataTable-table th a{
+    padding: 0px;
+}
+.dataTable-sorter::before, .dataTable-sorter::after {
+    display: none;
 }

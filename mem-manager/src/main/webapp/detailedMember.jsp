@@ -26,9 +26,16 @@
                         <input type="hidden" id="memberID" value="${member.id}" name="id"  readonly/>
                         <label >Họ Tên:</label>
                         <input type="text" class="readonly" value="${member.name}" readonly /><br><br>
+                        <label>Nhóm:</label>
+                        <c:if test="${not empty member.family.group}">
+                            <input type="text" class="readonly" value="${member.family.group.groupName}" readonly /><br><br>
+                        </c:if>
+                        <c:if test="${empty member.family.group}">
+                             <input type="text" class="readonly" value="Chưa được xếp" readonly /><br><br>
+                        </c:if>
                         <label>Gia Đình:</label>
                         <c:if test="${not empty member.family}">
-                            <input type="text" class="readonly" value="${item.family.name}" readonly /><br><br>
+                            <input type="text" class="readonly" value="${member.family.name}" readonly /><br><br>
                         </c:if>
                         <c:if test="${empty member.family}">
                              <input type="text" class="readonly" value="Chưa được xếp" readonly /><br><br>

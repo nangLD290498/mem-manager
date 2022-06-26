@@ -46,3 +46,6 @@
 .dropdown-toggle::after {
  display:none;
 }
+.message-text{
+    color: #00b92a;
+}

@@ -9,7 +9,7 @@ import javax.validation.constraints.*;
 
 @Entity
 @Data
-public class Member {
+public class Member  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
@@ -19,7 +19,7 @@ public class Member {
     @ToString.Exclude
     private Family family;
 
-    @Column(unique = true)
+    @Column
     private String code;
 
     @Column
