@@ -23,11 +23,9 @@ public class Member  {
     private String code;
 
     @Column
-    @NotBlank(message = "Tên không thể bỏ trống")
     private String name;
 
     @Column
-    @NotNull(message = "Tuổi không thể bỏ trống")
     private int age;
 
     public String getAgeString() {

@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @Service
 @Transactional
@@ -148,9 +149,17 @@ public class FamilyServiceImpl implements FamilyService {
             member.setAge(dowloadObject.getTuoi());
             member.setCode(utils.intToStringCode(codeInt));
             codeInt ++;
-            member.setGender(dowloadObject.getGioi_tinh());
+            if(dowloadObject.getGioi_tinh() != null) {
+                member.setGender(dowloadObject.getGioi_tinh().trim().toLowerCase().equals("nữ") ? "Nữ" : "Nam");
+            }else{
+                member.setGender("Nam");
+            }
             member.setPhoneNumber(dowloadObject.getSdt());
-            member.setIsAtending(dowloadObject.getDiem_danh().equals("không tham gia")?"false" : "true");
+            if(dowloadObject.getDiem_danh()!=null) {
+                member.setIsAtending(dowloadObject.getDiem_danh().trim().toLowerCase(Locale.ROOT).equals("tham gia") ? "true" : "false");
+            }else{
+                member.setIsAtending("false");
+            }
             member.setRelativeName(dowloadObject.getTen_nguoi_than());
             member.setRelationship(dowloadObject.getMoi_quan_he());
             member.setRelativePhoneNumber(dowloadObject.getSdt_nguoi_than());

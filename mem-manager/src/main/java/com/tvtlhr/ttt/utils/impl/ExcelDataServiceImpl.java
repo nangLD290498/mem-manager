@@ -99,7 +99,11 @@ public class ExcelDataServiceImpl implements IExcelDataService {
             dowloadObject.setSBD(excelData.get(i + 1));
             dowloadObject.setNhom(excelData.get(i + 2));
             dowloadObject.setGia_dinh(excelData.get(i + 3));
-            dowloadObject.setTuoi(Integer.parseInt(excelData.get(i + 4)));
+            try{
+                dowloadObject.setTuoi(Integer.parseInt(excelData.get(i + 4)));
+            }catch (Exception e){
+                dowloadObject.setTuoi(0);
+            }
             dowloadObject.setSdt(excelData.get(i + 5));
             dowloadObject.setGioi_tinh(excelData.get(i + 6));
             dowloadObject.setDiem_danh(excelData.get(i + 7));
