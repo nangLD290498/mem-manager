@@ -51,10 +51,20 @@ public class FamilyController {
     IExcelDataService iExcelDataService;
 
     @GetMapping("/getParam")
-    public ModelAndView getAddNewMemberPage(){
+    public ModelAndView getAddNewMemberPage(@RequestParam(required = false) String gender){
         int minAge = familyService.getMinAge();
         int maxAge = familyService.getMaxAge();
-        ModelAndView mv = new ModelAndView("redirect:/iniFamily?minAge="+minAge+"&maxAge="+maxAge);
+        ModelAndView mv = new ModelAndView();
+        if(gender != null && gender.equals("boy")){
+            mv.setViewName("redirect:/iniFamilyBoy?minAge="+minAge+"&maxAge="+maxAge);
+            return mv;
+        }
+        if(gender != null && gender.equals("girl")){
+            mv.setViewName("redirect:/iniFamilyGirl?minAge="+minAge+"&maxAge="+maxAge);
+            return mv;
+        }
+        //if(gender == null || gender.isEmpty())
+        mv.setViewName("redirect:/iniFamily?minAge="+minAge+"&maxAge="+maxAge);
         return mv;
     }
 
@@ -62,6 +72,24 @@ public class FamilyController {
     public ModelAndView initFamilyPage(@RequestParam int minAge, @RequestParam int maxAge)
     {
         ModelAndView mv = new ModelAndView("iniFamily");
+        mv.addObject("min", minAge);
+        mv.addObject("max", maxAge);
+        return mv;
+    }
+
+    @GetMapping("/iniFamilyBoy")
+    public ModelAndView initFamilyBoyPage(@RequestParam int minAge, @RequestParam int maxAge)
+    {
+        ModelAndView mv = new ModelAndView("iniFamilyBoy");
+        mv.addObject("min", minAge);
+        mv.addObject("max", maxAge);
+        return mv;
+    }
+
+    @GetMapping("/iniFamilyGirl")
+    public ModelAndView initFamilyGirlPage(@RequestParam int minAge, @RequestParam int maxAge)
+    {
+        ModelAndView mv = new ModelAndView("iniFamilyGirl");
         mv.addObject("min", minAge);
         mv.addObject("max", maxAge);
         return mv;
@@ -120,15 +148,31 @@ public class FamilyController {
             @RequestParam List<Integer> endAge,
             @RequestParam List<Integer> familyCount){
         ModelAndView mv = new ModelAndView("redirect:/familyMgt");
-       /* String startAgeString = familyService.processList(startAge);
-        String endAgeString = familyService.processList(endAge);
-        String familyCountString = familyService.processList(familyCount);
-
-        mv.addObject("startAge", startAgeString);
-        mv.addObject("endAge", endAgeString);
-        mv.addObject("familyCount", familyCountString);
-        mv.addObject("groupCount", groupCount.toString());*/
         familyService.processFamily(groupCount, startAge, endAge, familyCount );
+
+        return mv;
+    }
+
+    @RequestMapping(value = "/processFamilyBoy", method = {RequestMethod.GET, RequestMethod.POST} )
+    public ModelAndView processConfigureFamilyBoy(
+            @RequestParam Integer groupCount,
+            @RequestParam List<Integer> startAge,
+            @RequestParam List<Integer> endAge){
+        ModelAndView mv = new ModelAndView("redirect:/familyMgt");
+        familyService.processFamilyBoy(groupCount, startAge, endAge, "Nam" );
+
+        return mv;
+    }
+
+
+
+    @RequestMapping(value = "/processFamilyGirl", method = {RequestMethod.GET, RequestMethod.POST} )
+    public ModelAndView processConfigureFamilyGirl(
+            @RequestParam Integer groupCount,
+            @RequestParam List<Integer> startAge,
+            @RequestParam List<Integer> endAge){
+        ModelAndView mv = new ModelAndView("redirect:/familyMgt");
+        familyService.processFamilyBoy(groupCount, startAge, endAge, "Nữ" );
 
         return mv;
     }

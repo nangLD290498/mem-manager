@@ -82,7 +82,9 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-gear" id="setting-icon" ></i></a>
                                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                        <li><a class="dropdown-item" href="/getParam">Chia gia đình</a></li>
+                                         <!--<li><a class="dropdown-item" href="/getParam">Chia gia đình</a></li>-->
+                                         <a class="dropdown-item" href="/getParam?gender=boy">Chia gia đình Nam</a></li>
+                                         <a class="dropdown-item" href="/getParam?gender=girl">Chia gia đình Nữ</a></li>
                                         <li><a class="dropdown-item" href="/editFamilyName">Sửa tên gia đình</a></li>
                                     </ul>
                                 </li>

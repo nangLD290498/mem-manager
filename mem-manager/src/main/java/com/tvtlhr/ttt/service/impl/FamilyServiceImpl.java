@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -111,6 +112,59 @@ public class FamilyServiceImpl implements FamilyService {
             groupRepository.save(group);
         }
     }
+
+    @Override
+    public void processFamilyBoy(Integer groupCount, List<Integer> startAge, List<Integer> endAge, String gender) {
+        if(gender.equals("Nam")) {
+            groupRepository.deleteAll();
+        }
+        Group group = new Group();
+        group.setGroupName("Nhóm "+ gender);
+            // create groups
+            /*Group group = new Group();
+            group.setGroupName("Nhóm Nam " + i);
+            group.setStartAge(startAge.get(i-1));
+            group.setEndAge(endAge.get(i-1));*/
+            // create family
+            // logger.info("age range " + startAge.get(i-1) + "||" +endAge.get(i-1));
+            //List<Member> membersInGroup = membersInGroup(startAge.get(i-1), endAge.get(i-1));
+            //logger.info(membersInGroup.size() + " || "+membersInGroup.toString());
+            List<Family> families = new ArrayList<>();
+            //fa.setName("gia đình nam "+ i);
+            List<Member> members = new ArrayList<>();
+            members = memberRepository.findAll().stream().filter(member -> member.getGender().equals(gender)).collect(Collectors.toList());
+            List<Member> result = new ArrayList<>();
+            for(int j = 0; j < groupCount; j++){
+                Family officialFamily  = new Family();
+                officialFamily.setName("gia đình " + gender + (j+1));
+                int startAgeValue = startAge.get(j);
+                int endAgeValue = endAge.get(j);
+                result = members.stream().filter(member -> (member.getAge() >= startAgeValue && member.getAge() <= endAgeValue )).collect(Collectors.toList());
+                officialFamily.setMembers(result);
+                families.add(officialFamily);
+            }
+            //---------------------
+            /*List<Family> families = new ArrayList<>();
+            int numberOfFamilies = familyCount.get(i-1);
+            for(int j= 1; j<= numberOfFamilies; j++){
+                Family family = new Family();
+                family.setName("Gia đình Nam " + j);
+                //logger.info("Gia đình " + j);
+                List<Member> membersInFamily = new ArrayList<>();
+                for(int k =1; k <= membersInGroup.size(); k++ ){
+                    if(k % numberOfFamilies == j || k % numberOfFamilies==0){
+                        membersInFamily.add(membersInGroup.get(k-1));
+                    }
+                }
+                family.setMembers(membersInFamily);
+                families.add(family);
+            }
+            group.setFamilies(families);*/
+            group.setFamilies(families);
+
+        groupRepository.save(group);
+    }
+
 
     @Override
     public String processList(List<Integer> list) {
