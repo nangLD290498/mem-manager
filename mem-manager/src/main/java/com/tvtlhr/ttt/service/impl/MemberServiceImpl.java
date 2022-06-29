@@ -199,7 +199,7 @@ public class MemberServiceImpl implements MemberService {
         List<Family> results = new ArrayList<>();
         //Map<Family, Integer> map = new HashMap<>();
         //for (Family family: families) {
-            results = families.stream().filter(family1 -> family1.getGroup().getStartAge() >= member.getAge() && family1.getGroup().getEndAge() <= member.getAge()).collect(Collectors.toList());
+            results = families.stream().filter(family1 -> family1.getGroup().getStartAge() <= member.getAge() && family1.getGroup().getEndAge() >= member.getAge()).collect(Collectors.toList());
             /*List<Member> members = family.getMembers().stream().filter(member -> member.getGender().equals(gender)).collect(Collectors.toList());
             map.put(family, members.size());*/
             //logger.info(gender+ "||" +members.size());
