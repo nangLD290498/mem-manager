@@ -117,7 +117,7 @@ public class TableController {
             @RequestParam(required = false) String familyMgt){
         ModelAndView mv = new ModelAndView("editMem");
         Optional<Member> member =  memberService.findByID(id);
-        List<Family> families = familyService.getByGroup(id);
+        List<Family> families = familyService.getAll();
         if (member.isPresent()) {
             mv.addObject("member", member.get());
             mv.addObject("families", families);

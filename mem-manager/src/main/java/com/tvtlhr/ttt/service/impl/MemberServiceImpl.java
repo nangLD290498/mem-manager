@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class MemberServiceImpl implements MemberService {
-    //Logger logger = LoggerFactory.getLogger(this.getClass());
+    Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     MemberRepository memberRepository;
 
@@ -126,15 +126,19 @@ public class MemberServiceImpl implements MemberService {
         // set family cho member
         int age = member.getAge();
         String gender = member.getGender();
-        Group group = findGroup(age);
+        //Group group = findGroup(age);
         //logger.info("tuổi "+ age+ " thuộc từ "+ group.getStartAge()+" đến "+ group.getEndAge());
-        List<Family> families = new ArrayList<>();
-        if(group != null){
+        List<Family> families = familyRepository.findAll();
+        //if(group != null){
             // todo
-            families = findFamilyBaseOnQuantity(group);
+            //families = findFamilyBaseOnQuantity(group);
             //logger.info(families.get(0).getMembers().size() + "||" + families.size());
+        logger.info("11" + families.toString());
             families = findFamilyBaseOnGender(families, gender);
-        }
+        logger.info("22" + families.toString());
+            families = findFamilyBaseOnAge(families, member);
+        //}
+        logger.info("33" + families.toString());
         if(families.size() != 0){
             member.setFamily(families.get(0));
         }
@@ -174,7 +178,7 @@ public class MemberServiceImpl implements MemberService {
     private List<Family> findFamilyBaseOnGender(List<Family> families, String gender){
         List<Family> results = new ArrayList<>();
         Map<Family, Integer> map = new HashMap<>();
-        for (Family family: families) {
+        /*for (Family family: families) {
             List<Member> members = family.getMembers().stream().filter(member -> member.getGender().equals(gender)).collect(Collectors.toList());
             map.put(family, members.size());
             //logger.info(gender+ "||" +members.size());
@@ -187,7 +191,22 @@ public class MemberServiceImpl implements MemberService {
             if(v==min){
                 results.add(k);
             }
-        });
+        });*/
+        return familyRepository.findAll().stream().filter(family -> family.getMembers().get(0).getGender().equals(gender)).collect(Collectors.toList());
+    }
+
+    private List<Family> findFamilyBaseOnAge(List<Family> families, Member member){
+        List<Family> results = new ArrayList<>();
+        //Map<Family, Integer> map = new HashMap<>();
+        //for (Family family: families) {
+            results = families.stream().filter(family1 -> family1.getGroup().getStartAge() >= member.getAge() && family1.getGroup().getEndAge() <= member.getAge()).collect(Collectors.toList());
+            /*List<Member> members = family.getMembers().stream().filter(member -> member.getGender().equals(gender)).collect(Collectors.toList());
+            map.put(family, members.size());*/
+            //logger.info(gender+ "||" +members.size());
+        //}
+        if(results.size() == 0){
+            results=findFamilyBaseOnGender(familyRepository.findAll(), member.getGender());
+        }
         return results;
     }
 }
