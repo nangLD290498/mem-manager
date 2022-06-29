@@ -114,41 +114,26 @@ public class FamilyServiceImpl implements FamilyService {
     }
 
     @Override
-    public void processFamilyBoy(Integer groupCount, List<Integer> startAge, List<Integer> endAge, String gender) {
+    public void processFamilyBoy(Integer groupCount, List<Integer> startAge, List<Integer> endAge,List<Integer> familyCount, String gender) {
         if(gender.equals("Nam")) {
             groupRepository.deleteAll();
         }
-        Group group = new Group();
-        group.setGroupName("Nhóm "+ gender);
+        for(int i=1; i<= groupCount; i++){
             // create groups
-            /*Group group = new Group();
-            group.setGroupName("Nhóm Nam " + i);
+            Group group = new Group();
+            group.setGroupName("Nhóm " + i);
             group.setStartAge(startAge.get(i-1));
-            group.setEndAge(endAge.get(i-1));*/
+            group.setEndAge(endAge.get(i-1));
             // create family
             // logger.info("age range " + startAge.get(i-1) + "||" +endAge.get(i-1));
-            //List<Member> membersInGroup = membersInGroup(startAge.get(i-1), endAge.get(i-1));
+            List<Member> membersInGroupALL = membersInGroup(startAge.get(i-1), endAge.get(i-1));
+            List<Member> membersInGroup = membersInGroupALL.stream().filter(member -> member.getGender().equals(gender)).collect(Collectors.toList());
             //logger.info(membersInGroup.size() + " || "+membersInGroup.toString());
             List<Family> families = new ArrayList<>();
-            //fa.setName("gia đình nam "+ i);
-            List<Member> members = new ArrayList<>();
-            members = memberRepository.findAll().stream().filter(member -> member.getGender().equals(gender)).collect(Collectors.toList());
-            List<Member> result = new ArrayList<>();
-            for(int j = 0; j < groupCount; j++){
-                Family officialFamily  = new Family();
-                officialFamily.setName("gia đình " + gender + (j+1));
-                int startAgeValue = startAge.get(j);
-                int endAgeValue = endAge.get(j);
-                result = members.stream().filter(member -> (member.getAge() >= startAgeValue && member.getAge() <= endAgeValue )).collect(Collectors.toList());
-                officialFamily.setMembers(result);
-                families.add(officialFamily);
-            }
-            //---------------------
-            /*List<Family> families = new ArrayList<>();
             int numberOfFamilies = familyCount.get(i-1);
             for(int j= 1; j<= numberOfFamilies; j++){
                 Family family = new Family();
-                family.setName("Gia đình Nam " + j);
+                family.setName("Gia đình " + j);
                 //logger.info("Gia đình " + j);
                 List<Member> membersInFamily = new ArrayList<>();
                 for(int k =1; k <= membersInGroup.size(); k++ ){
@@ -159,10 +144,9 @@ public class FamilyServiceImpl implements FamilyService {
                 family.setMembers(membersInFamily);
                 families.add(family);
             }
-            group.setFamilies(families);*/
             group.setFamilies(families);
-
-        groupRepository.save(group);
+            groupRepository.save(group);
+        }
     }
 
 

@@ -157,9 +157,10 @@ public class FamilyController {
     public ModelAndView processConfigureFamilyBoy(
             @RequestParam Integer groupCount,
             @RequestParam List<Integer> startAge,
-            @RequestParam List<Integer> endAge){
+            @RequestParam List<Integer> endAge,
+            @RequestParam List<Integer> familyCount){
         ModelAndView mv = new ModelAndView("redirect:/familyMgt");
-        familyService.processFamilyBoy(groupCount, startAge, endAge, "Nam" );
+        familyService.processFamilyBoy(groupCount, startAge, endAge,familyCount, "Nam" );
 
         return mv;
     }
@@ -170,9 +171,10 @@ public class FamilyController {
     public ModelAndView processConfigureFamilyGirl(
             @RequestParam Integer groupCount,
             @RequestParam List<Integer> startAge,
-            @RequestParam List<Integer> endAge){
+            @RequestParam List<Integer> endAge,
+            @RequestParam List<Integer> familyCount){
         ModelAndView mv = new ModelAndView("redirect:/familyMgt");
-        familyService.processFamilyBoy(groupCount, startAge, endAge, "Nữ" );
+        familyService.processFamilyBoy(groupCount, startAge, endAge,familyCount, "Nữ" );
 
         return mv;
     }

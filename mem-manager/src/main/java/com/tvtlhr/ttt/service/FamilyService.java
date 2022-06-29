@@ -23,7 +23,7 @@ public interface FamilyService {
 
     void processFamily(Integer groupCount, List<Integer> startAge, List<Integer> endAge, List<Integer> familyCount);
 
-    void processFamilyBoy(Integer groupCount, List<Integer> startAge, List<Integer> endAge, String gender);
+    void processFamilyBoy(Integer groupCount, List<Integer> startAge, List<Integer> endAge,List<Integer> familyCount, String gender);
 
     String processList(List<Integer> list);
 
