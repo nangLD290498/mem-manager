@@ -1,0 +1,5 @@
+1. delete search textbox
+2. combine to search SBD
+3. pagination for load members
+4. enhance chia gia đình (load từng nhóm)
+5. verify fields when chia gia đình
